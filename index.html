@@ -1,0 +1,712 @@
+import { useState, useEffect, useRef } from "react";
+import { MapPin, Phone, MessageCircle, Clock, Users, BookOpen, AlertTriangle, ChevronDown, ChevronUp, X, Star, GraduationCap, Calendar, FileText, ExternalLink, Menu, ArrowRight, CheckCircle, Globe, Award, Shield } from "lucide-react";
+
+/* ─────────────── DATA ─────────────── */
+const SCHOOLS = [
+  {
+    id: 1,
+    name: "Tevfik İleri Anadolu İmam Hatip Lisesi",
+    subtitle: "Ortaokul Bölümü",
+    projectType: "Yoğunlaştırılmış Akademik Eğitim ve Yabancı Dil Projesi (İngilizce/Arapça)",
+    studentProfile: "Karma (Kız ve Erkek öğrenciler için ayrı bölümler)",
+    quota: null,
+    applicationDates: "23 Nisan 2026 - 23 Haziran 2026 (Saat 18:00'e kadar)",
+    examDate: "28 Haziran 2026 Pazar, Saat: 10:00",
+    address: "Emniyet Mah. Silahtar Cad. No:13 Yenimahalle/Ankara",
+    mapsLink: "https://www.google.com/maps/place/Tevfik+%C4%B0leri+Anadolu+%C4%B0mam+Hatip+Lisesi/@39.9431966,32.8219758,17z/data=!3m1!4b1!4m6!3m5!1s0x14d34ec459d437b9:0x27db3cf425b6f1ed!8m2!3d39.9431925!4d32.8245507!16s%2Fg%2F1vl5d3bf?entry=ttu&g_ep=EgoyMDI2MDQwNi4wIKXMDSoASAFQAw%3D%3D",
+    examContent: "Toplam 100 Soru: Türkçe (20), Matematik (20), Fen (20), Sosyal (20), Din (20)",
+    examRule: "Yanlış soru sayısı doğru sayısını etkilemez.",
+    examRuleType: "safe",
+    color: "#DC2626",
+    accent: "#FEE2E2",
+  },
+  {
+    id: 2,
+    name: "Şehit Ömer Halisdemir Anadolu İmam Hatip Lisesi",
+    subtitle: "Ortaokul Bölümü",
+    projectType: "Fen ve Sosyal Bilimler, Örgün Eğitimle Birlikte Hafızlık ve Yoğunlaştırılmış Yabancı Dil Projesi (İngilizce/Arapça)",
+    studentProfile: "Karma (Kız ve Erkek öğrenciler için ayrı kontenjanlar)",
+    quota: "Hafızlık (25 Kız, 25 Erkek), Yabancı Dil (65 Kız, 65 Erkek)",
+    applicationDates: "23 Mart 2026 - 22 Mayıs 2026",
+    examDate: "6 Haziran 2026 (Erkek: 09:30, Kız: 14:00)",
+    address: "Serhat Mah. 1290. Sokak No:8/A Yenimahalle / ANKARA",
+    mapsLink: "https://www.google.com/maps/place/%C5%9Eehit+%C3%96mer+Halisdemir+Anadolu+%C4%B0mam+Hatip+Lisesi/@39.9783601,32.7571562,17z/data=!3m1!4b1!4m6!3m5!1s0x14d3499cd78c8b19:0x400b0089e808c3a!8m2!3d39.978356!4d32.7597311!16s%2Fg%2F11c2j7333m?entry=ttu&g_ep=EgoyMDI2MDQwNi4wIKXMDSoASAFQAw%3D%3D",
+    examContent: "60 Soru / 100 Dk: Türkçe (15), Matematik (20), Fen (10), Sosyal (5), Din (5), İngilizce (5)",
+    examRule: "3 yanlış 1 doğruyu götürür; Türkçe ve Matematikte toplam 10 mantık sorusu bulunur.",
+    examRuleType: "warning",
+    color: "#2563EB",
+    accent: "#DBEAFE",
+  },
+  {
+    id: 3,
+    name: "Şehit Cengiz Polat Anadolu İmam Hatip Lisesi",
+    subtitle: "Ankara Teknoloji AİHL",
+    projectType: "Teknoloji ve Akademik Başarı Proje Okulu",
+    studentProfile: "Karma (72 Kız, 72 Erkek)",
+    quota: "144 Öğrenci",
+    applicationDates: "Nisan - Haziran dönemi (2026 takvimi bekleniyor)",
+    examDate: "Haziran sonu (2026 takvimi bekleniyor)",
+    address: "Varlık Mah. Eşref Bitlis Cad. No:10 B-Blok Yenimahalle/Ankara",
+    mapsLink: "https://www.google.com/maps/place/%C5%9Eehit+Cengiz+Polat+Anadolu+%C4%B0mam+Hatip+Lisesi+(YEN%C4%B0MAHALLE+-+ANKARA)/@39.9596806,32.8306903,17z/data=!3m1!4b1!4m6!3m5!1s0x14d34e98e78bfcd5:0x4a1bbbabe17bb584!8m2!3d39.9596765!4d32.8332652!16s%2Fg%2F11c1tswqmg?entry=ttu&g_ep=EgoyMDI2MDQwNi4wIKXMDSoASAFQAw%3D%3D",
+    examContent: "75 Soru / 100 Dk: Türkçe (15), Matematik (15), Fen (15), Din (10), Sosyal (10), İngilizce (10)",
+    examRule: "Yanlışlar doğruyu götürmez; değerlendirme doğru cevaplar üzerinden yapılır.",
+    examRuleType: "safe",
+    color: "#7C3AED",
+    accent: "#EDE9FE",
+  },
+  {
+    id: 4,
+    name: "Batıkent Şehit Demet Sezen Kız Anadolu İmam Hatip Lisesi",
+    subtitle: "Ortaokul Bölümü",
+    projectType: "Fen Bilimleri ve Sosyal Bilimler Proje Okulu",
+    studentProfile: "Sadece Kız",
+    quota: "144 Öğrenci",
+    applicationDates: "01 Nisan 2026 - 04 Haziran 2026",
+    examDate: "07 Haziran 2026 Pazar, Saat: 10:30",
+    address: "Kentkoop Mah. 1867. Sk. No:5 Yenimahalle/Ankara",
+    mapsLink: "https://www.google.com/maps/place/Bat%C4%B1kent+%C5%9Eehit+Demet+Sezen+K%C4%B1z+Anadolu+%C4%B0mam+Hatip+Lisesi/@39.9671992,32.7092835,17z/data=!3m1!4b1!4m6!3m5!1s0x14d3362219bd7ca9:0x9d2aa1b936b1b800!8m2!3d39.9671951!4d32.7118584!16s%2Fg%2F11c1p2trvp?entry=ttu&g_ep=EgoyMDI2MDQwNi4wIKXMDSoASAFQAw%3D%3D",
+    examContent: "60 Soru / 100 Dk: Türkçe (15), Matematik (20), Fen (10), Din (5), Sosyal (5), İngilizce (5)",
+    examRule: "3 yanlış 1 doğruyu götürür; 350 puan barajı uygulanır.",
+    examRuleType: "warning",
+    color: "#DB2777",
+    accent: "#FCE7F3",
+  },
+  {
+    id: 5,
+    name: "Şehit Oğuzhan Yaşar Anadolu İmam Hatip Lisesi",
+    subtitle: "Ortaokul Bölümü",
+    projectType: "Örgün Eğitimle Birlikte Hafızlık Projesi",
+    studentProfile: "Karma (Kız ve Erkek öğrenciler için ayrı bölümler)",
+    quota: null,
+    applicationDates: "2026 Takvimi Bekleniyor (Nisan-Mayıs)",
+    examDate: "2026 Takvimi Bekleniyor",
+    address: "İvedik Cd. No:454 Yenimahalle/Ankara",
+    mapsLink: "https://www.google.com/maps/place/%C5%9Eehit+o%C4%9Fuzhan+ya%C5%9Far+imam+hatip+ortaokulu/@39.9840389,32.684463,17z/data=!3m1!4b1!4m6!3m5!1s0x14d33645be7ee2db:0x7d6713ce64a77437!8m2!3d39.9840348!4d32.6870379!16s%2Fg%2F11gg67mqcf?entry=ttu&g_ep=EgoyMDI2MDQwNi4wIKXMDSoASAFQAw%3D%3D",
+    examContent: "Akademik Seviye Tespit Sınavı + Hafızlık Kabul Mülakatı",
+    examRule: null,
+    examRuleType: null,
+    color: "#059669",
+    accent: "#D1FAE5",
+  },
+  {
+    id: 6,
+    name: "Şehit Muhammed Ali Sarı İmam Hatip Ortaokulu",
+    subtitle: "",
+    projectType: "Örgün Eğitimle Birlikte Hafızlık Projesi",
+    studentProfile: "Karma (Kız ve Erkek öğrenciler için ayrı bölümler)",
+    quota: null,
+    applicationDates: "2026 Takvimi Bekleniyor (Nisan-Mayıs)",
+    examDate: "2026 Takvimi Bekleniyor",
+    address: "Batı Sitesi Mah. 2307. Cadde No:4 Yenimahalle/Ankara",
+    mapsLink: "https://www.google.com/maps/place/%C5%9Eehit+Muhammed+Ali+Sar%C4%B1+%C4%B0mam+Hatip+Ortaokulu/@40.0353308,32.7799585,17z/data=!3m1!4b1!4m6!3m5!1s0x14d34b0592a4c873:0xb67f548aa9914331!8m2!3d40.0353267!4d32.7825334!16s%2Fg%2F11gwgwrkcy?entry=ttu&g_ep=EgoyMDI2MDQwNi4wIKXMDSoASAFQAw%3D%3D",
+    examContent: "Akademik Seviye Tespit Sınavı + Hafızlık Yetenek Mülakatı",
+    examRule: null,
+    examRuleType: null,
+    color: "#D97706",
+    accent: "#FEF3C7",
+  },
+];
+
+const YILDIZ_KURS = {
+  phone: "0312 346 06 33",
+  phoneLink: "tel:+903123460633",
+  whatsapp: "0532 479 06 68",
+  whatsappLink: "https://wa.me/905324790668",
+  website: "yildizkurs.com.tr",
+  websiteLink: "https://yildizkurs.com.tr",
+  address: "Aşağı Yahyalar Mah. 994 Cad. No: 6/A Yenimahalle/ANKARA",
+  mapsLink: "https://www.google.com/maps/place/Y%C4%B1ld%C4%B1z+Kurs/@39.9852817,32.771865,17z/data=!3m1!4b1!4m6!3m5!1s0x14d34bd7d69c4d29:0x381942e4201bc05a!8m2!3d39.9852776!4d32.7744399!16s%2Fg%2F11xf01wjlm?entry=ttu&g_ep=EgoyMDI2MDQwNi4wIKXMDSoASAFQAw%3D%3D",
+};
+
+/* ─────────────── JSON-LD SCHEMA ─────────────── */
+function SchemaMarkup() {
+  const schoolSchemas = SCHOOLS.map((s) => ({
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    name: s.name,
+    address: { "@type": "PostalAddress", streetAddress: s.address, addressLocality: "Yenimahalle", addressRegion: "Ankara", addressCountry: "TR" },
+    url: s.mapsLink,
+    course: { "@type": "Course", name: s.projectType, provider: { "@type": "EducationalOrganization", name: s.name } },
+  }));
+  const businessSchema = {
+    "@context": "https://schema.org",
+    "@type": ["LocalBusiness", "ProfessionalService"],
+    name: "Yıldız Kurs",
+    telephone: "+903123460633",
+    url: "https://yildizkurs.com.tr",
+    address: { "@type": "PostalAddress", streetAddress: "Aşağı Yahyalar Mah. 994 Cad. No: 6/A", addressLocality: "Yenimahalle", addressRegion: "Ankara", addressCountry: "TR" },
+  };
+  return null; // In a real Next.js app, these would go in <Head> as <script type="application/ld+json">
+}
+
+/* ─────────────── COMPONENTS ─────────────── */
+
+function StarIcon({ className }) {
+  return <Star className={className} />;
+}
+
+/* ── Lead Modal ── */
+function LeadModal({ open, onClose }) {
+  const [form, setForm] = useState({ name: "", surname: "", phone: "", grade: "" });
+  const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  if (!open) return null;
+
+  const validate = () => {
+    const e = {};
+    if (!form.name.trim()) e.name = true;
+    if (!form.surname.trim()) e.surname = true;
+    if (!form.phone.trim() || form.phone.replace(/\D/g, "").length < 10) e.phone = true;
+    if (!form.grade) e.grade = true;
+    setErrors(e);
+    return Object.keys(e).length === 0;
+  };
+
+  const handleSubmit = () => {
+    if (!validate()) return;
+    setSubmitted(true);
+  };
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      style={{ background: "rgba(0,0,0,0.6)", backdropFilter: "blur(6px)" }}
+      onClick={onClose}
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="relative w-full max-w-md rounded-2xl bg-white shadow-2xl overflow-hidden"
+        style={{ animation: "modalIn 0.3s ease-out" }}
+      >
+        {/* Header */}
+        <div className="bg-gradient-to-r from-red-600 to-red-700 px-6 py-5 text-white">
+          <button onClick={onClose} className="absolute top-4 right-4 text-white/80 hover:text-white">
+            <X size={22} />
+          </button>
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+              <Star size={20} />
+            </div>
+            <div>
+              <p className="font-bold text-lg leading-tight">Yıldız Kurs</p>
+              <p className="text-sm text-red-100">Ücretsiz Deneme Sınavı Randevusu</p>
+            </div>
+          </div>
+        </div>
+
+        {!submitted ? (
+          <div className="p-6 space-y-4">
+            <p className="text-sm text-gray-600">Bilgilerinizi bırakın, sizi arayalım.</p>
+            {/* Name */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Ad *</label>
+              <input
+                type="text"
+                value={form.name}
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
+                className={`w-full border rounded-lg px-3 py-2.5 text-sm outline-none transition ${errors.name ? "border-red-400 bg-red-50" : "border-gray-300 focus:border-red-500"}`}
+                placeholder="Adınız"
+              />
+            </div>
+            {/* Surname */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Soyad *</label>
+              <input
+                type="text"
+                value={form.surname}
+                onChange={(e) => setForm({ ...form, surname: e.target.value })}
+                className={`w-full border rounded-lg px-3 py-2.5 text-sm outline-none transition ${errors.surname ? "border-red-400 bg-red-50" : "border-gray-300 focus:border-red-500"}`}
+                placeholder="Soyadınız"
+              />
+            </div>
+            {/* Phone */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Telefon *</label>
+              <input
+                type="tel"
+                value={form.phone}
+                onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                className={`w-full border rounded-lg px-3 py-2.5 text-sm outline-none transition ${errors.phone ? "border-red-400 bg-red-50" : "border-gray-300 focus:border-red-500"}`}
+                placeholder="05XX XXX XX XX"
+              />
+            </div>
+            {/* Grade */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Öğrenci Sınıfı *</label>
+              <select
+                value={form.grade}
+                onChange={(e) => setForm({ ...form, grade: e.target.value })}
+                className={`w-full border rounded-lg px-3 py-2.5 text-sm outline-none transition ${errors.grade ? "border-red-400 bg-red-50" : "border-gray-300 focus:border-red-500"}`}
+              >
+                <option value="">Sınıf Seçiniz</option>
+                <option value="3">3. Sınıf</option>
+                <option value="4">4. Sınıf</option>
+                <option value="5">5. Sınıf</option>
+                <option value="6">6. Sınıf</option>
+                <option value="7">7. Sınıf</option>
+                <option value="8">8. Sınıf</option>
+              </select>
+            </div>
+            <button
+              onClick={handleSubmit}
+              className="w-full bg-red-600 text-white font-bold py-3 rounded-xl hover:bg-red-700 transition-all active:scale-[0.98] shadow-lg shadow-red-200"
+            >
+              Ücretsiz Randevu Al
+            </button>
+            <p className="text-xs text-center text-gray-400">Bilgileriniz gizli tutulur ve yalnızca randevu amacıyla kullanılır.</p>
+          </div>
+        ) : (
+          <div className="p-8 text-center space-y-3">
+            <div className="w-16 h-16 bg-green-100 rounded-full mx-auto flex items-center justify-center">
+              <CheckCircle size={32} className="text-green-600" />
+            </div>
+            <h3 className="text-xl font-bold text-gray-900">Teşekkürler!</h3>
+            <p className="text-gray-600 text-sm">Bilgileriniz alındı. Yıldız Kurs ekibi sizi en kısa sürede arayacaktır.</p>
+            <button onClick={onClose} className="mt-2 text-sm text-red-600 font-medium hover:underline">
+              Kapat
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* ── CTA Card ── */
+function CTACard({ onOpen }) {
+  return (
+    <div className="my-8 mx-auto max-w-2xl">
+      <div
+        className="relative rounded-2xl overflow-hidden shadow-xl"
+        style={{
+          background: "linear-gradient(135deg, #DC2626 0%, #991B1B 100%)",
+        }}
+      >
+        {/* Decorative shapes */}
+        <div className="absolute top-0 right-0 w-40 h-40 rounded-full bg-white/5 -translate-y-1/2 translate-x-1/2" />
+        <div className="absolute bottom-0 left-0 w-24 h-24 rounded-full bg-white/5 translate-y-1/2 -translate-x-1/2" />
+
+        <div className="relative p-6 md:p-8 text-white text-center space-y-4">
+          <div className="inline-flex items-center gap-2 bg-white/15 rounded-full px-4 py-1.5 text-sm font-medium backdrop-blur-sm">
+            <Star size={14} fill="currentColor" />
+            Yıldız Kurs
+          </div>
+          <h3 className="text-2xl md:text-3xl font-extrabold leading-tight">
+            Çocuğunuz Bu Sınavlara<br />Hazır mı?
+          </h3>
+          <p className="text-red-100 max-w-sm mx-auto text-sm md:text-base">
+            Yıldız Kurs Ücretsiz Deneme Sınavı İçin Hemen Randevu Alın.
+          </p>
+          <button
+            onClick={onOpen}
+            className="inline-flex items-center gap-2 bg-white text-red-700 font-bold px-8 py-3.5 rounded-xl hover:bg-red-50 transition-all active:scale-[0.97] shadow-lg"
+          >
+            Ücretsiz Randevu Al
+            <ArrowRight size={18} />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── Exam Rule Badge ── */
+function ExamRuleBadge({ rule, type }) {
+  if (!rule) return null;
+  const isWarning = type === "warning";
+  return (
+    <div className={`flex items-start gap-2.5 mt-3 p-3 rounded-xl text-sm ${isWarning ? "bg-amber-50 border border-amber-200 text-amber-800" : "bg-emerald-50 border border-emerald-200 text-emerald-800"}`}>
+      {isWarning ? <AlertTriangle size={16} className="mt-0.5 shrink-0 text-amber-500" /> : <CheckCircle size={16} className="mt-0.5 shrink-0 text-emerald-500" />}
+      <span className="font-medium leading-snug">{rule}</span>
+    </div>
+  );
+}
+
+/* ── School Card ── */
+function SchoolCard({ school, index }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div
+      className="group bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100"
+      style={{ transform: "translateY(0)", transition: "transform 0.3s, box-shadow 0.3s" }}
+      onMouseEnter={(e) => (e.currentTarget.style.transform = "translateY(-4px)")}
+      onMouseLeave={(e) => (e.currentTarget.style.transform = "translateY(0)")}
+    >
+      {/* Color top bar */}
+      <div className="h-1.5" style={{ background: school.color }} />
+
+      <div className="p-5 md:p-6">
+        {/* Header */}
+        <div className="flex items-start gap-3 mb-4">
+          <div
+            className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 text-white font-bold text-lg"
+            style={{ background: school.color }}
+          >
+            {index + 1}
+          </div>
+          <div className="min-w-0">
+            <h2 className="text-lg md:text-xl font-extrabold text-gray-900 leading-tight">{school.name}</h2>
+            {school.subtitle && <p className="text-sm text-gray-500 mt-0.5">{school.subtitle}</p>}
+          </div>
+        </div>
+
+        {/* Project Tag */}
+        <div className="mb-4 px-3 py-2 rounded-lg text-sm font-medium" style={{ background: school.accent, color: school.color }}>
+          <BookOpen size={14} className="inline mr-1.5 -mt-0.5" />
+          {school.projectType}
+        </div>
+
+        {/* Key Info Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+          <InfoRow icon={<Users size={15} />} label="Öğrenci Profili" value={school.studentProfile} />
+          {school.quota && <InfoRow icon={<GraduationCap size={15} />} label="Kontenjan" value={school.quota} />}
+          <InfoRow icon={<Calendar size={15} />} label="Başvuru Tarihleri" value={school.applicationDates} />
+          <InfoRow icon={<Clock size={15} />} label="Sınav Tarihi" value={school.examDate} />
+        </div>
+
+        {/* Expandable Detail */}
+        <button
+          onClick={() => setOpen(!open)}
+          className="mt-4 flex items-center gap-1.5 text-sm font-semibold hover:underline"
+          style={{ color: school.color }}
+        >
+          {open ? "Detayları Gizle" : "Sınav Detayları ve Konum"}
+          {open ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+        </button>
+
+        {open && (
+          <div className="mt-3 space-y-3 border-t border-gray-100 pt-3">
+            <div className="flex items-start gap-2 text-sm text-gray-700">
+              <FileText size={15} className="mt-0.5 shrink-0 text-gray-400" />
+              <div><span className="font-semibold">Sınav İçeriği:</span> {school.examContent}</div>
+            </div>
+            <ExamRuleBadge rule={school.examRule} type={school.examRuleType} />
+            <div className="flex items-start gap-2 text-sm text-gray-700">
+              <MapPin size={15} className="mt-0.5 shrink-0 text-gray-400" />
+              <div>
+                <span className="font-semibold">Adres:</span> {school.address}
+                <a
+                  href={school.mapsLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ml-2 inline-flex items-center gap-1 font-semibold hover:underline"
+                  style={{ color: school.color }}
+                >
+                  Haritada Gör <ExternalLink size={12} />
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function InfoRow({ icon, label, value }) {
+  return (
+    <div className="flex items-start gap-2 text-gray-700">
+      <span className="mt-0.5 text-gray-400 shrink-0">{icon}</span>
+      <div className="min-w-0">
+        <p className="text-xs text-gray-400 font-medium uppercase tracking-wide">{label}</p>
+        <p className="font-semibold leading-snug">{value}</p>
+      </div>
+    </div>
+  );
+}
+
+/* ── Yıldız Kurs Section ── */
+function YildizKursSection({ onOpen }) {
+  return (
+    <section id="yildiz-kurs" className="py-12 md:py-16">
+      <div className="max-w-4xl mx-auto px-4">
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center gap-2 bg-red-100 text-red-700 rounded-full px-4 py-1.5 text-sm font-bold mb-3">
+            <Star size={14} fill="currentColor" /> Yıldız Kurs
+          </div>
+          <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900">Yıldız Kurs Rehberlik Merkezi</h2>
+          <p className="mt-2 text-gray-500 max-w-lg mx-auto">Yenimahalle'nin güvenilir eğitim markası. Proje okulları sınavlarına özel hazırlık programları.</p>
+        </div>
+
+        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+          {/* Contact Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-0">
+            <div className="p-6 space-y-4 border-b md:border-b-0 md:border-r border-gray-100">
+              <h3 className="font-bold text-gray-900 flex items-center gap-2"><Phone size={16} className="text-red-600" /> İletişim Bilgileri</h3>
+              <div className="space-y-3">
+                <a href={YILDIZ_KURS.phoneLink} className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 hover:bg-red-50 transition group">
+                  <div className="w-9 h-9 rounded-lg bg-red-100 flex items-center justify-center"><Phone size={16} className="text-red-600" /></div>
+                  <div>
+                    <p className="text-xs text-gray-400">Telefon</p>
+                    <p className="font-bold text-gray-900 group-hover:text-red-600 transition">{YILDIZ_KURS.phone}</p>
+                  </div>
+                </a>
+                <a href={YILDIZ_KURS.whatsappLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 hover:bg-green-50 transition group">
+                  <div className="w-9 h-9 rounded-lg bg-green-100 flex items-center justify-center"><MessageCircle size={16} className="text-green-600" /></div>
+                  <div>
+                    <p className="text-xs text-gray-400">WhatsApp</p>
+                    <p className="font-bold text-gray-900 group-hover:text-green-600 transition">{YILDIZ_KURS.whatsapp}</p>
+                  </div>
+                </a>
+                <a href={YILDIZ_KURS.websiteLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 hover:bg-blue-50 transition group">
+                  <div className="w-9 h-9 rounded-lg bg-blue-100 flex items-center justify-center"><Globe size={16} className="text-blue-600" /></div>
+                  <div>
+                    <p className="text-xs text-gray-400">Web Sitesi</p>
+                    <p className="font-bold text-gray-900 group-hover:text-blue-600 transition">{YILDIZ_KURS.website}</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div className="p-6 space-y-4">
+              <h3 className="font-bold text-gray-900 flex items-center gap-2"><MapPin size={16} className="text-red-600" /> Konum</h3>
+              <a href={YILDIZ_KURS.mapsLink} target="_blank" rel="noopener noreferrer" className="block">
+                <div className="w-full h-48 rounded-xl bg-gray-100 overflow-hidden relative group">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3059.123!2d32.771865!3d39.9852817!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d34bd7d69c4d29%3A0x381942e4201bc05a!2sY%C4%B1ld%C4%B1z%20Kurs!5e0!3m2!1str!2str!4v1700000000000!5m2!1str!2str"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen=""
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Yıldız Kurs Konum"
+                    className="pointer-events-none"
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition flex items-center justify-center">
+                    <span className="opacity-0 group-hover:opacity-100 transition bg-white/90 text-gray-900 text-sm font-bold px-4 py-2 rounded-lg shadow">
+                      Google Maps'te Aç <ExternalLink size={12} className="inline ml-1" />
+                    </span>
+                  </div>
+                </div>
+              </a>
+              <p className="text-sm text-gray-600 flex items-start gap-2">
+                <MapPin size={14} className="mt-0.5 shrink-0 text-gray-400" />
+                {YILDIZ_KURS.address}
+              </p>
+              <button
+                onClick={onOpen}
+                className="w-full bg-red-600 text-white font-bold py-3 rounded-xl hover:bg-red-700 transition-all active:scale-[0.98] shadow-lg shadow-red-200 flex items-center justify-center gap-2"
+              >
+                <Star size={16} fill="currentColor" />
+                Ücretsiz Deneme Sınavı Randevusu
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────── MAIN APP ─────────────── */
+export default function YenimahalleProjeOkullari() {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const h = () => setScrolled(window.scrollY > 60);
+    window.addEventListener("scroll", h, { passive: true });
+    return () => window.removeEventListener("scroll", h);
+  }, []);
+
+  return (
+    <>
+      {/* ── Global Styles ── */}
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        * { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; box-sizing: border-box; }
+        body { margin: 0; background: #F9FAFB; -webkit-font-smoothing: antialiased; }
+        @keyframes modalIn { from { opacity: 0; transform: scale(0.95) translateY(12px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-up { animation: fadeUp 0.6s ease-out both; }
+        .fade-up-1 { animation-delay: 0.1s; }
+        .fade-up-2 { animation-delay: 0.2s; }
+        .fade-up-3 { animation-delay: 0.3s; }
+        @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+      `}</style>
+
+      <SchemaMarkup />
+
+      {/* ── Header ── */}
+      <header
+        className={`sticky top-0 z-40 transition-all duration-300 ${scrolled ? "bg-white/95 backdrop-blur-md shadow-sm" : "bg-white"}`}
+      >
+        <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <div className="w-9 h-9 rounded-lg bg-red-600 flex items-center justify-center">
+              <Star size={18} className="text-white" fill="currentColor" />
+            </div>
+            <div className="leading-none">
+              <span className="text-sm md:text-base font-extrabold text-gray-900">Yenimahalle</span>
+              <span className="block text-[11px] text-gray-400 font-medium">Proje Okulları Rehberi</span>
+            </div>
+          </div>
+          <div className="hidden md:flex items-center gap-3">
+            <a href={YILDIZ_KURS.phoneLink} className="inline-flex items-center gap-1.5 text-sm font-semibold text-gray-600 hover:text-red-600 transition">
+              <Phone size={14} /> {YILDIZ_KURS.phone}
+            </a>
+            <a href={YILDIZ_KURS.whatsappLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 bg-green-600 text-white text-sm font-bold px-4 py-2 rounded-lg hover:bg-green-700 transition">
+              <MessageCircle size={14} /> WhatsApp
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        {/* ── Sponsor Banner ── */}
+        <div className="bg-red-600 text-white text-center text-xs md:text-sm font-medium py-2 px-4">
+          <Star size={12} className="inline -mt-0.5 mr-1" fill="currentColor" />
+          Yıldız Kurs Uzman Rehberlik Desteğiyle Hazırlanmıştır.
+        </div>
+
+        {/* ── Hero ── */}
+        <section className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-red-900 text-white">
+          {/* Decorative */}
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute top-10 left-10 w-72 h-72 rounded-full bg-red-500 blur-3xl" />
+            <div className="absolute bottom-10 right-10 w-96 h-96 rounded-full bg-white blur-3xl" />
+          </div>
+          <div className="relative max-w-4xl mx-auto px-4 py-16 md:py-24 text-center">
+            <div className="fade-up">
+              <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-sm font-medium backdrop-blur-sm mb-6">
+                <span className="w-2 h-2 rounded-full bg-green-400" style={{ animation: "pulse-dot 2s infinite" }} />
+                2026 Başvuruları Açık
+              </div>
+            </div>
+            <h1 className="text-3xl md:text-5xl font-extrabold leading-tight mb-4 fade-up fade-up-1">
+              Yenimahalle Proje Okulları<br />
+              <span className="text-red-400">Başvuru ve Sınav Rehberi (2026)</span>
+            </h1>
+            <p className="text-gray-300 text-base md:text-lg max-w-2xl mx-auto mb-8 fade-up fade-up-2">
+              Tevfik İleri, Şehit Ömer Halisdemir ve Yenimahalle'deki tüm proje ortaokullarının sınav takvimi, kontenjan, başvuru detayları — tek bir rehberde.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 fade-up fade-up-3">
+              <a href="#okullar" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white text-gray-900 font-bold px-8 py-3.5 rounded-xl hover:bg-gray-100 transition shadow-lg">
+                <GraduationCap size={18} /> Okulları İncele
+              </a>
+              <button onClick={() => setModalOpen(true)} className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-red-600 text-white font-bold px-8 py-3.5 rounded-xl hover:bg-red-700 transition shadow-lg shadow-red-900/30">
+                <Star size={18} fill="currentColor" /> Ücretsiz Deneme Sınavı
+              </button>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Quick Stats ── */}
+        <section className="bg-white border-b border-gray-100">
+          <div className="max-w-4xl mx-auto px-4 py-8 grid grid-cols-3 gap-4 text-center">
+            <div>
+              <p className="text-2xl md:text-3xl font-extrabold text-red-600">6</p>
+              <p className="text-xs md:text-sm text-gray-500 font-medium mt-1">Proje Okulu</p>
+            </div>
+            <div>
+              <p className="text-2xl md:text-3xl font-extrabold text-red-600">2026</p>
+              <p className="text-xs md:text-sm text-gray-500 font-medium mt-1">Güncel Takvim</p>
+            </div>
+            <div>
+              <p className="text-2xl md:text-3xl font-extrabold text-red-600">500+</p>
+              <p className="text-xs md:text-sm text-gray-500 font-medium mt-1">Toplam Kontenjan</p>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Schools Section ── */}
+        <section id="okullar" className="py-12 md:py-16">
+          <div className="max-w-4xl mx-auto px-4">
+            <div className="text-center mb-10">
+              <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900">Yenimahalle Proje Ortaokulları</h2>
+              <p className="mt-2 text-gray-500">Tüm okulların sınav takvimi, kontenjan ve başvuru detayları</p>
+            </div>
+
+            <div className="space-y-6">
+              {SCHOOLS.map((school, i) => (
+                <div key={school.id}>
+                  <SchoolCard school={school} index={i} />
+                  {/* CTA after 1st card */}
+                  {i === 0 && <CTACard onOpen={() => setModalOpen(true)} />}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── Yıldız Kurs ── */}
+        <div className="bg-gray-50">
+          <YildizKursSection onOpen={() => setModalOpen(true)} />
+        </div>
+
+        {/* ── FAQ-style Info ── */}
+        <section className="py-12 md:py-16 bg-white">
+          <div className="max-w-4xl mx-auto px-4">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 text-center mb-8">Sık Sorulan Sorular</h2>
+            <div className="space-y-4">
+              {[
+                { q: "Proje okulu sınavlarına kimler başvurabilir?", a: "Ankara genelinde ikamet eden ve 4. sınıfı tamamlayan öğrenciler (bazı okullar için farklı sınıf düzeyleri geçerli olabilir) başvurabilir. Her okulun kendine özgü başvuru şartları bulunmaktadır." },
+                { q: "Sınavlarda yanlış cevaplar doğruyu götürür mü?", a: "Bu okula göre değişir. Örneğin Tevfik İleri'de yanlışlar doğruyu götürmezken, Şehit Ömer Halisdemir ve Batıkent Şehit Demet Sezen'de 3 yanlış 1 doğruyu götürür. Her okulun kuralını kart detayından inceleyebilirsiniz." },
+                { q: "Hafızlık projesi olan okulların sınavı nasıl?", a: "Hafızlık proje okullarında genellikle akademik seviye tespit sınavına ek olarak hafızlık kabul mülakatı yapılmaktadır." },
+              ].map((faq, i) => (
+                <FAQItem key={i} q={faq.q} a={faq.a} />
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {/* ── Footer ── */}
+      <footer className="bg-gray-900 text-gray-400 py-10">
+        <div className="max-w-4xl mx-auto px-4 text-center space-y-3">
+          <div className="flex items-center justify-center gap-2">
+            <div className="w-7 h-7 rounded-md bg-red-600 flex items-center justify-center">
+              <Star size={14} className="text-white" fill="currentColor" />
+            </div>
+            <span className="font-bold text-white">YenimahalleProjeOkullari.com</span>
+          </div>
+          <p className="text-sm">Yıldız Kurs Uzman Rehberlik Desteğiyle Hazırlanmıştır.</p>
+          <p className="text-xs text-gray-500">© 2026 Tüm Hakları Saklıdır. Bu site bir bilgilendirme portalıdır.</p>
+          <div className="flex items-center justify-center gap-4 text-sm">
+            <a href={YILDIZ_KURS.websiteLink} target="_blank" rel="noopener noreferrer" className="hover:text-white transition">yildizkurs.com.tr</a>
+            <span className="text-gray-700">|</span>
+            <a href={YILDIZ_KURS.phoneLink} className="hover:text-white transition">{YILDIZ_KURS.phone}</a>
+          </div>
+        </div>
+      </footer>
+
+      {/* ── Mobile Dock ── */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
+        <div className="flex">
+          <a href={YILDIZ_KURS.phoneLink} className="flex-1 flex items-center justify-center gap-2 py-3.5 text-sm font-bold text-red-600 active:bg-red-50 transition">
+            <Phone size={18} /> Hemen Ara
+          </a>
+          <div className="w-px bg-gray-200" />
+          <a href={YILDIZ_KURS.whatsappLink} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-2 py-3.5 text-sm font-bold text-green-600 active:bg-green-50 transition">
+            <MessageCircle size={18} /> WhatsApp
+          </a>
+        </div>
+      </div>
+
+      {/* ── Spacer for mobile dock ── */}
+      <div className="md:hidden h-14" />
+
+      {/* ── Lead Modal ── */}
+      <LeadModal open={modalOpen} onClose={() => setModalOpen(false)} />
+    </>
+  );
+}
+
+/* ── FAQ Accordion ── */
+function FAQItem({ q, a }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="border border-gray-200 rounded-xl overflow-hidden">
+      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between p-4 md:p-5 text-left hover:bg-gray-50 transition">
+        <span className="font-bold text-gray-900 text-sm md:text-base pr-4">{q}</span>
+        {open ? <ChevronUp size={18} className="shrink-0 text-gray-400" /> : <ChevronDown size={18} className="shrink-0 text-gray-400" />}
+      </button>
+      {open && (
+        <div className="px-4 md:px-5 pb-4 md:pb-5 text-sm text-gray-600 leading-relaxed border-t border-gray-100 pt-3">
+          {a}
+        </div>
+      )}
+    </div>
+  );
+}
