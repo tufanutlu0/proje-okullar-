@@ -1,444 +1,149 @@
-import { useState, useEffect, useRef } from "react";
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yenimahalle Proje Okulları Başvuru Rehberi 2026</title>
+    <link rel="icon" href="yildiz-kurs.png">
+    <meta name="description" content="Tevfik İleri, Şehit Ömer Halisdemir ve Yenimahalle proje okulları 2026 sınav rehberi.">
+    
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Crimson+Pro:wght@800;900&display=swap');
+        :root { --r600: #dc2626; --r700: #b91c1c; }
+        body { font-family: 'Outfit', sans-serif; background: #fafafa; }
+        .serif { font-family: 'Crimson Pro', serif; }
+        .sc-card { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .sc-card:hover { transform: translateY(-8px); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15); }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
 
-/*  YenimahalleProjeOkullari.com — FINAL
-    Görseller: yildiz-kurs.png, okul1.jpg-okul6.jpg
-    Depoya at, çalışsın. */
+    <script type="text/babel">
+        const { useState, useEffect } = React;
 
-// ── VERİ ──────────────────────────────────────────────
-const schools = [
-  { id:1, img:"okul1.jpg", name:"Tevfik İleri Anadolu İmam Hatip Lisesi", subtitle:"Ortaokul Bölümü",
-    projectType:"Yoğunlaştırılmış Akademik Eğitim ve Yabancı Dil Projesi (İngilizce/Arapça)",
-    studentProfile:"Karma (Kız ve Erkek öğrenciler için ayrı bölümler)", quota:null,
-    applicationDates:"23 Nisan 2026 - 23 Haziran 2026 (Saat 18:00'e kadar)",
-    examDate:"28 Haziran 2026 Pazar, Saat: 10:00",
-    address:"Emniyet Mah. Silahtar Cad. No:13 Yenimahalle/Ankara",
-    mapsLink:"https://www.google.com/maps/place/Tevfik+%C4%B0leri+Anadolu+%C4%B0mam+Hatip+Lisesi/@39.9431966,32.8219758,17z/data=!3m1!4b1!4m6!3m5!1s0x14d34ec459d437b9:0x27db3cf425b6f1ed!8m2!3d39.9431925!4d32.8245507!16s%2Fg%2F1vl5d3bf?entry=ttu&g_ep=EgoyMDI2MDQwNi4wIKXMDSoASAFQAw%3D%3D",
-    examContent:"Toplam 100 Soru: Türkçe (20), Matematik (20), Fen (20), Sosyal (20), Din (20)",
-    examRule:"Yanlış soru sayısı doğru sayısını etkilemez.", examRuleType:"safe",
-    subjects:[{n:"Türkçe",c:20,cl:"#3b82f6"},{n:"Matematik",c:20,cl:"#ef4444"},{n:"Fen",c:20,cl:"#22c55e"},{n:"Sosyal",c:20,cl:"#a855f7"},{n:"Din",c:20,cl:"#f59e0b"}], total:100, dur:null },
-  { id:2, img:"okul2.jpg", name:"Şehit Ömer Halisdemir Anadolu İmam Hatip Lisesi", subtitle:"Ortaokul Bölümü",
-    projectType:"Fen ve Sosyal Bilimler, Örgün Eğitimle Birlikte Hafızlık ve Yoğunlaştırılmış Yabancı Dil Projesi (İngilizce/Arapça)",
-    studentProfile:"Karma (Kız ve Erkek öğrenciler için ayrı kontenjanlar)",
-    quota:"Hafızlık (25 Kız, 25 Erkek), Yabancı Dil (65 Kız, 65 Erkek)",
-    applicationDates:"23 Mart 2026 - 22 Mayıs 2026",
-    examDate:"6 Haziran 2026 (Erkek: 09:30, Kız: 14:00)",
-    address:"Serhat Mah. 1290. Sokak No:8/A Yenimahalle / ANKARA",
-    mapsLink:"https://www.google.com/maps/place/%C5%9Eehit+%C3%96mer+Halisdemir+Anadolu+%C4%B0mam+Hatip+Lisesi/@39.9783601,32.7571562,17z/data=!3m1!4b1!4m6!3m5!1s0x14d3499cd78c8b19:0x400b0089e808c3a!8m2!3d39.978356!4d32.7597311!16s%2Fg%2F11c2j7333m?entry=ttu&g_ep=EgoyMDI2MDQwNi4wIKXMDSoASAFQAw%3D%3D",
-    examContent:"60 Soru / 100 Dk: Türkçe (15), Matematik (20), Fen (10), Sosyal (5), Din (5), İngilizce (5)",
-    examRule:"3 yanlış 1 doğruyu götürür. Türkçe ve Matematikte toplam 10 mantık sorusu bulunur.", examRuleType:"danger",
-    subjects:[{n:"Türkçe",c:15,cl:"#3b82f6"},{n:"Matematik",c:20,cl:"#ef4444"},{n:"Fen",c:10,cl:"#22c55e"},{n:"Sosyal",c:5,cl:"#a855f7"},{n:"Din",c:5,cl:"#f59e0b"},{n:"İngilizce",c:5,cl:"#06b6d4"}], total:60, dur:"100 Dk" },
-  { id:3, img:"okul3.jpg", name:"Şehit Cengiz Polat Anadolu İmam Hatip Lisesi", subtitle:"Ankara Teknoloji AİHL",
-    projectType:"Teknoloji ve Akademik Başarı Proje Okulu",
-    studentProfile:"Karma (72 Kız, 72 Erkek)", quota:"144 Öğrenci",
-    applicationDates:"Nisan - Haziran dönemi (2026 takvimi bekleniyor)",
-    examDate:"Haziran sonu (2026 takvimi bekleniyor)",
-    address:"Varlık Mah. Eşref Bitlis Cad. No:10 B-Blok Yenimahalle/Ankara",
-    mapsLink:"https://www.google.com/maps/place/%C5%9Eehit+Cengiz+Polat+Anadolu+%C4%B0mam+Hatip+Lisesi+(YEN%C4%B0MAHALLE+-+ANKARA)/@39.9596806,32.8306903,17z/data=!3m1!4b1!4m6!3m5!1s0x14d34e98e78bfcd5:0x4a1bbbabe17bb584!8m2!3d39.9596765!4d32.8332652!16s%2Fg%2F11c1tswqmg?entry=ttu&g_ep=EgoyMDI2MDQwNi4wIKXMDSoASAFQAw%3D%3D",
-    examContent:"75 Soru / 100 Dk: Türkçe (15), Matematik (15), Fen (15), Din (10), Sosyal (10), İngilizce (10)",
-    examRule:"Yanlışlar doğruyu götürmez; değerlendirme doğru cevaplar üzerinden yapılır.", examRuleType:"safe",
-    subjects:[{n:"Türkçe",c:15,cl:"#3b82f6"},{n:"Matematik",c:15,cl:"#ef4444"},{n:"Fen",c:15,cl:"#22c55e"},{n:"Din",c:10,cl:"#f59e0b"},{n:"Sosyal",c:10,cl:"#a855f7"},{n:"İngilizce",c:10,cl:"#06b6d4"}], total:75, dur:"100 Dk" },
-  { id:4, img:"okul4.jpg", name:"Batıkent Şehit Demet Sezen Kız Anadolu İmam Hatip Lisesi", subtitle:"Ortaokul Bölümü",
-    projectType:"Fen Bilimleri ve Sosyal Bilimler Proje Okulu",
-    studentProfile:"Sadece Kız", quota:"144 Öğrenci",
-    applicationDates:"01 Nisan 2026 - 04 Haziran 2026",
-    examDate:"07 Haziran 2026 Pazar, Saat: 10:30",
-    address:"Kentkoop Mah. 1867. Sk. No:5 Yenimahalle/Ankara",
-    mapsLink:"https://www.google.com/maps/place/Bat%C4%B1kent+%C5%9Eehit+Demet+Sezen+K%C4%B1z+Anadolu+%C4%B0mam+Hatip+Lisesi/@39.9671992,32.7092835,17z/data=!3m1!4b1!4m6!3m5!1s0x14d3362219bd7ca9:0x9d2aa1b936b1b800!8m2!3d39.9671951!4d32.7118584!16s%2Fg%2F11c1p2trvp?entry=ttu&g_ep=EgoyMDI2MDQwNi4wIKXMDSoASAFQAw%3D%3D",
-    examContent:"60 Soru / 100 Dk: Türkçe (15), Matematik (20), Fen (10), Din (5), Sosyal (5), İngilizce (5)",
-    examRule:"3 yanlış 1 doğruyu götürür; 350 puan barajı uygulanır.", examRuleType:"danger",
-    subjects:[{n:"Türkçe",c:15,cl:"#3b82f6"},{n:"Matematik",c:20,cl:"#ef4444"},{n:"Fen",c:10,cl:"#22c55e"},{n:"Din",c:5,cl:"#f59e0b"},{n:"Sosyal",c:5,cl:"#a855f7"},{n:"İngilizce",c:5,cl:"#06b6d4"}], total:60, dur:"100 Dk" },
-  { id:5, img:"okul5.jpg", name:"Şehit Oğuzhan Yaşar Anadolu İmam Hatip Lisesi", subtitle:"Ortaokul Bölümü",
-    projectType:"Örgün Eğitimle Birlikte Hafızlık Projesi",
-    studentProfile:"Karma (Kız ve Erkek öğrenciler için ayrı bölümler)", quota:null,
-    applicationDates:"2026 Takvimi Bekleniyor (Nisan-Mayıs)", examDate:"2026 Takvimi Bekleniyor",
-    address:"İvedik Cd. No:454 Yenimahalle/Ankara",
-    mapsLink:"https://www.google.com/maps/place/%C5%9Eehit+o%C4%9Fuzhan+ya%C5%9Far+imam+hatip+ortaokulu/@39.9840389,32.684463,17z/data=!3m1!4b1!4m6!3m5!1s0x14d33645be7ee2db:0x7d6713ce64a77437!8m2!3d39.9840348!4d32.6870379!16s%2Fg%2F11gg67mqcf?entry=ttu&g_ep=EgoyMDI2MDQwNi4wIKXMDSoASAFQAw%3D%3D",
-    examContent:"Akademik Seviye Tespit Sınavı + Hafızlık Kabul Mülakatı",
-    examRule:null, examRuleType:null, subjects:[], total:null, dur:null },
-  { id:6, img:"okul6.jpg", name:"Şehit Muhammed Ali Sarı İmam Hatip Ortaokulu", subtitle:"",
-    projectType:"Örgün Eğitimle Birlikte Hafızlık Projesi",
-    studentProfile:"Karma (Kız ve Erkek öğrenciler için ayrı bölümler)", quota:null,
-    applicationDates:"2026 Takvimi Bekleniyor (Nisan-Mayıs)", examDate:"2026 Takvimi Bekleniyor",
-    address:"Batı Sitesi Mah. 2307. Cadde No:4 Yenimahalle/Ankara",
-    mapsLink:"https://www.google.com/maps/place/%C5%9Eehit+Muhammed+Ali+Sar%C4%B1+%C4%B0mam+Hatip+Ortaokulu/@40.0353308,32.7799585,17z/data=!3m1!4b1!4m6!3m5!1s0x14d34b0592a4c873:0xb67f548aa9914331!8m2!3d40.0353267!4d32.7825334!16s%2Fg%2F11gwgwrkcy?entry=ttu&g_ep=EgoyMDI2MDQwNi4wIKXMDSoASAFQAw%3D%3D",
-    examContent:"Akademik Seviye Tespit Sınavı + Hafızlık yetenek mülakatı",
-    examRule:null, examRuleType:null, subjects:[], total:null, dur:null },
-];
+        const SCHOOLS = [
+            { id:1, img:"okul1.jpg", name:"Tevfik İleri Anadolu İmam Hatip Lisesi", subtitle:"Ortaokul Bölümü",
+                projectType:"Akademik ve Yabancı Dil Projesi", 
+                examDate:"28 Haziran 2026 Pazar, 10:00",
+                applyDates:"23 Nisan - 23 Haziran 2026",
+                address:"Emniyet Mah. Silahtar Cad. No:13 Yenimahalle",
+                mapsLink:"https://www.google.com/maps/place/Tevfik+%C4%B0leri+Anadolu+%C4%B0mam+Hatip+Lisesi/@39.9431966,32.8219758,17z/data=!3m1!4b1!4m6!3m5!1s0x14d34ec459d437b9:0x27db3cf425b6f1ed!8m2!3d39.9431925!4d32.8245507!16s%2Fg%2F1vl5d3bf?entry=ttu&g_ep=EgoyMDI2MDQwNi4wIKXMDSoASAFQAw%3D%3D",
+                examContent:"100 Soru: Türkçe(20), Mat(20), Fen(20), Sosyal(20), Din(20)",
+                examRule:"Yanlışlar doğruyu götürmez.", ruleType:"safe" },
+            { id:2, img:"okul2.jpg", name:"Şehit Ömer Halisdemir AİHL", subtitle:"Ortaokul Bölümü",
+                projectType:"Hafızlık ve Dil Projesi",
+                examDate:"6 Haziran 2026",
+                applyDates:"23 Mart - 22 Mayıs 2026",
+                address:"Serhat Mah. 1290. Sokak No:8/A Yenimahalle",
+                mapsLink:"https://www.google.com/maps/place/%C5%9Eehit+%C3%96mer+Halisdemir+Anadolu+%C4%B0mam+Hatip+Lisesi/@39.9783601,32.7571562,17z/data=!3m1!4b1!4m6!3m5!1s0x14d3499cd78c8b19:0x400b0089e808c3a!8m2!3d39.978356!4d32.7597311!16s%2Fg%2F11c2j7333m?entry=ttu&g_ep=EgoyMDI2MDQwNi4wIKXMDSoASAFQAw%3D%3D",
+                examContent:"60 Soru + 10 Mantık Sorusu",
+                examRule:"3 Yanlış 1 Doğruyu Götürür.", ruleType:"danger" },
+            { id:3, img:"okul3.jpg", name:"Şehit Cengiz Polat AİHL", subtitle:"Ankara Teknoloji AİHL",
+                projectType:"Teknoloji ve Akademik Başarı Projesi",
+                examDate:"Haziran Sonu (Bekleniyor)",
+                applyDates:"Nisan - Haziran Dönemi",
+                address:"Varlık Mah. Eşref Bitlis Cad. No:10 Yenimahalle",
+                mapsLink:"https://www.google.com/maps/place/%C5%9Eehit+Cengiz+Polat+Anadolu+%C4%B0mam+Hatip+Lisesi+(YEN%C4%B0MAHALLE+-+ANKARA)/@39.9596806,32.8306903,17z/data=!3m1!4b1!4m6!3m5!1s0x14d34e98e78bfcd5:0x4a1bbbabe17bb584!8m2!3d39.9596765!4d32.8332652!16s%2Fg%2F11c1tswqmg?entry=ttu&g_ep=EgoyMDI2MDQwNi4wIKXMDSoASAFQAw%3D%3D",
+                examContent:"75 Soru / 100 Dakika",
+                examRule:"Yanlışlar doğruyu götürmez.", ruleType:"safe" },
+            { id:4, img:"okul4.jpg", name:"Şehit Demet Sezen Kız AİHL", subtitle:"Ortaokul Bölümü",
+                projectType:"Fen ve Sosyal Bilimler Projesi",
+                examDate:"7 Haziran 2026, 10:30",
+                applyDates:"1 Nisan - 4 Haziran 2026",
+                address:"Kentkoop Mah. 1867. Sk. No:5 Yenimahalle",
+                mapsLink:"https://www.google.com/maps/place/Bat%C4%B1kent+%C5%9Eehit+Demet+Sezen+K%C4%B1z+Anadolu+%C4%B0mam+Hatip+Lisesi/@39.9671992,32.7092835,17z/data=!3m1!4b1!4m6!3m5!1s0x14d3362219bd7ca9:0x9d2aa1b936b1b800!8m2!3d39.9671951!4d32.7118584!16s%2Fg%2F11c1p2trvp?entry=ttu&g_ep=EgoyMDI2MDQwNi4wIKXMDSoASAFQAw%3D%3D",
+                examContent:"60 Soru / 100 Dakika",
+                examRule:"3 Yanlış 1 Doğruyu Götürür.", ruleType:"danger" }
+        ];
 
-const Y = {
-  phone:"0312 346 06 33", tel:"tel:+903123460633",
-  wa:"0532 479 06 68", waLink:"https://wa.me/905324790668",
-  web:"https://yildizkurs.com.tr",
-  addr:"Aşağı Yahyalar Mah. 994 Cad. No: 6/A Yenimahalle/ANKARA",
-  map:"https://www.google.com/maps/place/Y%C4%B1ld%C4%B1z+Kurs/@39.9852817,32.771865,17z/data=!3m1!4b1!4m6!3m5!1s0x14d34bd7d69c4d29:0x381942e4201bc05a!8m2!3d39.9852776!4d32.7744399!16s%2Fg%2F11xf01wjlm?entry=ttu&g_ep=EgoyMDI2MDQwNi4wIKXMDSoASAFQAw%3D%3D",
-  embed:"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3059.1!2d32.771865!3d39.9852817!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d34bd7d69c4d29%3A0x381942e4201bc05a!2zWcSxbGTEsXogS3Vycw!5e0!3m2!1str!2str!4v1",
-};
+        const App = () => {
+            const [modal, setModal] = useState(false);
 
-// ── HOOKS ─────────────────────────────────────────────
-function useReveal(t=0.08){
-  const r=useRef(null);const[v,setV]=useState(false);
-  useEffect(()=>{const e=r.current;if(!e)return;const o=new IntersectionObserver(([x])=>{if(x.isIntersecting){setV(true);o.unobserve(e)}},{threshold:t});o.observe(e);return()=>o.disconnect()},[t]);
-  return[r,v];
-}
-function Reveal({children,delay=0,dir="up",className="",style={}}){
-  const[r,v]=useReveal();
-  const m={up:"translateY(60px)",down:"translateY(-60px)",left:"translateX(60px)",right:"translateX(-60px)",scale:"scale(0.88)"};
-  return <div ref={r} className={className} style={{...style,opacity:v?1:0,transform:v?"none":m[dir],transition:`opacity .8s cubic-bezier(.16,1,.3,1) ${delay}s, transform .8s cubic-bezier(.16,1,.3,1) ${delay}s`}}>{children}</div>;
-}
+            return (
+                <div className="min-h-screen">
+                    {/* Header */}
+                    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+                        <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+                            <div className="flex items-center gap-3">
+                                <img src="yildiz-kurs.png" className="h-10" alt="Logo" />
+                                <div className="leading-tight">
+                                    <span className="block text-sm font-extrabold text-red-600">YENİMAHALLE</span>
+                                    <span className="text-xs font-bold text-gray-700">PROJE OKULLARI</span>
+                                </div>
+                            </div>
+                            <button onClick={() => setModal(true)} className="bg-red-600 text-white px-4 py-2 rounded-lg text-xs font-bold hover:bg-red-700 transition">BİLGİ AL</button>
+                        </div>
+                    </header>
 
-function getCD(d){
-  const m=d.match(/(\d{1,2})\s+(Ocak|Şubat|Mart|Nisan|Mayıs|Haziran|Temmuz|Ağustos|Eylül|Ekim|Kasım|Aralık)\s+(\d{4})/);
-  if(!m)return null;
-  const M={Ocak:0,Şubat:1,Mart:2,Nisan:3,Mayıs:4,Haziran:5,Temmuz:6,Ağustos:7,Eylül:8,Ekim:9,Kasım:10,Aralık:11};
-  const df=new Date(+m[3],M[m[2]],+m[1])-new Date();
-  if(df<=0)return null;
-  return{d:Math.floor(df/864e5),h:Math.floor((df%864e5)/36e5)};
-}
+                    {/* Hero */}
+                    <section className="bg-gradient-to-br from-red-900 to-red-700 text-white py-16 px-4 text-center">
+                        <h1 className="serif text-4xl md:text-5xl font-black mb-4">2026 Sınav & Başvuru Rehberi</h1>
+                        <p className="max-w-2xl mx-auto opacity-80 text-sm md:text-base">Tüm proje okullarının güncel sınav takvimi ve içerikleri Yıldız Kurs sponsorluğuyla tek bir sayfada.</p>
+                    </section>
 
-// ── İKONLAR ───────────────────────────────────────────
-const Ic={
-  Phone:({s=18})=><svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>,
-  WA:({s=18})=><svg width={s} height={s} viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>,
-  Map:({s=16})=><svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>,
-  Cal:({s=16})=><svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>,
-  Users:({s=16})=><svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
-  Clock:({s=16})=><svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>,
-  File:({s=16})=><svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>,
-  Alert:({s=16})=><svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>,
-  Check:({s=16})=><svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>,
-  X:()=><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>,
-  Ext:({s=14})=><svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>,
-  Grad:({s=16})=><svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg>,
-  Trophy:({s=18})=><svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>,
-  Arr:({s=14})=><svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>,
-};
+                    {/* Schools */}
+                    <main className="max-w-6xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+                        {SCHOOLS.map((s, i) => (
+                            <div key={s.id} className="sc-card bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm flex flex-col">
+                                <div className="h-48 bg-gray-200 relative">
+                                    <img src={s.img} className="w-full h-full object-cover" alt={s.name} />
+                                    <div className="absolute top-4 left-4 bg-red-600 text-white text-[10px] font-black px-2 py-1 rounded">#{i+1}</div>
+                                    <div className={`absolute top-4 right-4 text-[10px] font-bold px-2 py-1 rounded shadow-lg ${s.ruleType === 'safe' ? 'bg-green-500 text-white' : 'bg-amber-500 text-white'}`}>
+                                        {s.ruleType === 'safe' ? 'YANLIŞ GÖTÜRMEZ' : '3 YANLIŞ = 1 DOĞRU'}
+                                    </div>
+                                </div>
+                                <div className="p-6 flex-grow">
+                                    <h2 className="serif text-xl font-black text-gray-900 mb-1">{s.name}</h2>
+                                    <p className="text-red-600 text-xs font-bold mb-4 uppercase tracking-wider">{s.projectType}</p>
+                                    
+                                    <div className="space-y-3 text-sm text-gray-600">
+                                        <div className="flex justify-between border-b border-gray-50 pb-2">
+                                            <span className="font-bold">Sınav Tarihi:</span>
+                                            <span>{s.examDate}</span>
+                                        </div>
+                                        <div className="flex justify-between border-b border-gray-50 pb-2">
+                                            <span className="font-bold">İçerik:</span>
+                                            <span className="text-right">{s.examContent}</span>
+                                        </div>
+                                        <div className="flex justify-between">
+                                            <span className="font-bold">Adres:</span>
+                                            <span className="text-right text-xs">{s.address}</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="mt-6 flex gap-3">
+                                        <a href={s.mapsLink} target="_blank" className="flex-1 text-center py-3 bg-gray-50 text-gray-700 text-xs font-bold rounded-xl hover:bg-gray-100 transition">HARİTADA GÖR</a>
+                                        <button onClick={() => setModal(true)} className="flex-1 bg-red-600 text-white py-3 text-xs font-bold rounded-xl hover:bg-red-700 transition shadow-lg shadow-red-100">BAŞVURU YAP</button>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </main>
 
-// ── CSS ───────────────────────────────────────────────
-const CSS = `
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Crimson+Pro:wght@700;800;900&display=swap');
-:root{--r50:#fef2f2;--r100:#fee2e2;--r200:#fecaca;--r300:#fca5a5;--r500:#ef4444;--r600:#dc2626;--r700:#b91c1c;--r800:#991b1b;--r900:#7f1d1d;--g50:#f9fafb;--g100:#f3f4f6;--g200:#e5e7eb;--g300:#d1d5db;--g400:#9ca3af;--g500:#6b7280;--g600:#4b5563;--g700:#374151;--g800:#1f2937;--g900:#111827;--grn50:#f0fdf4;--grn700:#15803d;--amb50:#fffbeb;--amb700:#b45309;--f:'Outfit',sans-serif;--d:'Crimson Pro',serif}
-*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth;overflow-x:hidden}body{font-family:var(--f);color:var(--g800);background:#fafafa;-webkit-font-smoothing:antialiased}
+                    {/* Footer / Yıldız Kurs */}
+                    <footer className="bg-gray-900 text-white py-12 px-4">
+                        <div className="max-w-4xl mx-auto text-center">
+                            <img src="yildiz-kurs.png" className="h-16 mx-auto mb-6" alt="Yıldız Kurs" />
+                            <h3 className="serif text-2xl font-bold mb-4">Sınav Başarısı İçin Yıldız Kurs</h3>
+                            <p className="opacity-60 text-sm mb-8">Uzman kadromuz ve özel deneme kulübümüzle çocuğunuzu proje okullarına hazırlıyoruz.</p>
+                            <div className="flex flex-wrap justify-center gap-6 text-sm font-bold">
+                                <a href="tel:+903123460633" className="text-red-400">0312 346 06 33</a>
+                                <a href="https://wa.me/905324790668" target="_blank" className="text-green-400">WhatsApp: 0532 479 06 68</a>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            );
+        };
 
-@keyframes pulse{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.15)}}
-@keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes glow{0%,100%{box-shadow:0 0 20px rgba(220,38,38,.15)}50%{box-shadow:0 0 44px rgba(220,38,38,.35)}}
-@keyframes bounceIn{0%{opacity:0;transform:scale(.3)}50%{transform:scale(1.05)}70%{transform:scale(.95)}100%{opacity:1;transform:scale(1)}}
-@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
-
-/* HEADER */
-.hd{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.88);backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid var(--g200)}
-.hd-in{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:10px 20px}
-.hd-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-.hd-logo-img{width:42px;height:42px;border-radius:10px;object-fit:contain;overflow:hidden;background:var(--r50);border:2px solid var(--r100)}
-.hd-logo-img img{width:100%;height:100%;object-fit:contain}
-.hd-txt{font-size:12.5px;font-weight:700;color:var(--g800);line-height:1.3}
-.hd-txt b{color:var(--r600);font-weight:800}
-.hd-nav{display:flex;gap:4px}
-.hd-nav a{padding:8px 14px;border-radius:8px;font-size:13px;font-weight:600;text-decoration:none;color:var(--g500);transition:all .2s}
-.hd-nav a:hover{background:var(--r50);color:var(--r700)}
-.hd-cta{background:var(--r600);color:#fff;border:none;padding:10px 22px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;transition:all .3s;font-family:var(--f)}
-.hd-cta:hover{background:var(--r700);transform:translateY(-2px);box-shadow:0 8px 24px rgba(220,38,38,.3)}
-@media(max-width:768px){.hd-nav{display:none}.hd-cta{padding:8px 14px;font-size:11.5px}}
-
-/* HERO */
-.hero{position:relative;overflow:hidden;background:linear-gradient(145deg,#1a0000,var(--r900) 30%,var(--r800) 60%,#450a0a);padding:100px 20px 80px}
-.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 20%,rgba(239,68,68,.15),transparent 60%),radial-gradient(ellipse at 70% 80%,rgba(239,68,68,.1),transparent 50%)}
-.hero-gr{position:absolute;inset:0;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-.hero-in{max-width:900px;margin:0 auto;text-align:center;position:relative;z-index:2}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:100px;padding:8px 22px;margin-bottom:32px;font-size:13px;font-weight:600;color:rgba(255,255,255,.85);backdrop-filter:blur(10px);animation:fadeUp .8s ease both}
-.hero-dot{width:8px;height:8px;border-radius:50%;background:#4ade80;animation:pulse 2s infinite}
-.hero h1{font-family:var(--d);font-size:clamp(32px,6vw,56px);font-weight:900;color:#fff;line-height:1.15;margin-bottom:20px;animation:fadeUp .8s ease .15s both}
-.hero h1 em{font-style:normal;background:linear-gradient(135deg,#fca5a5,#fecaca);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero-sub{font-size:clamp(14px,2.2vw,17px);color:rgba(255,255,255,.6);max-width:600px;margin:0 auto 40px;line-height:1.8;animation:fadeUp .8s ease .3s both}
-.hero-stats{display:flex;justify-content:center;gap:48px;flex-wrap:wrap;animation:fadeUp .8s ease .45s both}
-.hs-n{font-family:var(--d);font-size:clamp(32px,5vw,44px);font-weight:900;color:#fff}
-.hs-l{font-size:12px;color:rgba(255,255,255,.45);margin-top:4px;font-weight:500;letter-spacing:.5px;text-transform:uppercase}
-
-/* YK BANNER */
-.yb{position:relative;overflow:hidden;border-radius:16px;background:linear-gradient(135deg,var(--r700),var(--r900));padding:18px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.yb::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23fff' fill-opacity='.03'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/svg%3E")}
-.yb>*{position:relative;z-index:2}
-.yb-l{display:flex;align-items:center;gap:12px}
-.yb-logo{width:42px;height:42px;border-radius:10px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);overflow:hidden;flex-shrink:0;animation:glow 3s infinite}
-.yb-logo img{width:100%;height:100%;object-fit:contain}
-.yb-t{color:#fff}
-.yb-t strong{font-size:14px;font-weight:800;display:flex;align-items:center;gap:6px}
-.yb-t p{font-size:12px;opacity:.65;margin-top:2px}
-.yb-r{display:flex;gap:8px;flex-wrap:wrap}
-.yb-btn{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none;border:none;cursor:pointer;font-family:var(--f);transition:all .3s}
-.yb-btn.w{background:#fff;color:var(--r700)}
-.yb-btn.w:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.2)}
-.yb-btn.g{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.18)}
-.yb-btn.g:hover{background:rgba(255,255,255,.18)}
-@media(max-width:640px){.yb{flex-direction:column;text-align:center;padding:18px}.yb-l{flex-direction:column}.yb-r{width:100%;justify-content:center}}
-
-/* SECTION */
-.sec{max-width:1200px;margin:0 auto;padding:56px 20px}
-.sec-hd{text-align:center;margin-bottom:44px}
-.sec-tag{display:inline-block;background:var(--r50);color:var(--r700);padding:6px 18px;border-radius:100px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px}
-.sec-t{font-family:var(--d);font-size:clamp(26px,4.5vw,40px);font-weight:900;color:var(--g900);line-height:1.2}
-.sec-d{font-size:15px;color:var(--g400);margin-top:10px;max-width:560px;margin-left:auto;margin-right:auto;line-height:1.7}
-
-/* SCHOOL CARDS */
-.scs{display:flex;flex-direction:column;gap:32px}
-.sc{background:#fff;border-radius:24px;overflow:hidden;border:1px solid var(--g200);transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .5s cubic-bezier(.22,1,.36,1)}
-.sc:hover{transform:translateY(-8px);box-shadow:0 32px 64px -16px rgba(0,0,0,.1)}
-.sc-img{position:relative;height:220px;overflow:hidden}
-.sc-img img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.22,1,.36,1)}
-.sc:hover .sc-img img{transform:scale(1.06)}
-.sc-ov{position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(0,0,0,.75))}
-.sc-num{position:absolute;top:14px;left:14px;background:var(--r600);color:#fff;padding:5px 12px;border-radius:8px;font-size:11.5px;font-weight:800;letter-spacing:1px}
-.sc-badges{position:absolute;top:14px;right:14px;display:flex;gap:6px}
-.sc-rb{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:700;backdrop-filter:blur(12px)}
-.sc-rb.safe{background:rgba(22,163,74,.85);color:#fff}
-.sc-rb.danger{background:rgba(245,158,11,.9);color:#fff}
-.sc-imt{position:absolute;bottom:16px;left:20px;right:20px}
-.sc-imt h2{font-family:var(--d);font-size:clamp(18px,3vw,24px);font-weight:900;color:#fff;line-height:1.25;text-shadow:0 2px 12px rgba(0,0,0,.5)}
-.sc-imt span{font-size:13px;color:rgba(255,255,255,.7);font-weight:500}
-.sc-body{padding:24px 28px 28px}
-.sc-proj{display:inline-flex;align-items:center;gap:8px;background:var(--r50);border:1px solid var(--r100);padding:8px 14px;border-radius:10px;font-size:12.5px;font-weight:600;color:var(--r700);line-height:1.4;margin-bottom:18px}
-.sc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:18px}
-.sc-item{display:flex;align-items:flex-start;gap:10px;padding:14px;background:var(--g50);border-radius:14px;border:1px solid transparent;transition:all .25s}
-.sc-item:hover{border-color:var(--r100);background:var(--r50)}
-.sc-ico{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;background:var(--r50);color:var(--r600);flex-shrink:0}
-.sc-lbl{font-size:10.5px;color:var(--g400);font-weight:700;text-transform:uppercase;letter-spacing:.5px}
-.sc-val{font-size:13px;color:var(--g800);font-weight:600;margin-top:2px;line-height:1.5}
-.sc-val.red{color:var(--r600);font-size:12px;margin-top:3px}
-.cd-row{display:flex;gap:6px;margin-top:8px}
-.cd-it{background:linear-gradient(135deg,var(--r50),var(--r100));border-radius:8px;padding:5px 10px;text-align:center;min-width:44px}
-.cd-n{font-size:16px;font-weight:900;color:var(--r700)}
-.cd-l{font-size:8px;color:var(--r500);font-weight:700;text-transform:uppercase;letter-spacing:.5px}
-.sc-rule{padding:12px 16px;border-radius:12px;font-size:13px;font-weight:600;line-height:1.5;display:flex;align-items:flex-start;gap:8px;margin-bottom:16px}
-.sc-rule.safe{background:var(--grn50);color:var(--grn700);border:1px solid #bbf7d0}
-.sc-rule.danger{background:var(--amb50);color:var(--amb700);border:1px solid #fed7aa}
-.ex-t{font-size:11px;font-weight:700;color:var(--g400);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
-.ex-bar{display:flex;height:32px;border-radius:8px;overflow:hidden;gap:2px}
-.ex-seg{display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff;transition:flex .6s ease}
-.ex-leg{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-.ex-li{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--g500);font-weight:500}
-.ex-dot{width:8px;height:8px;border-radius:3px}
-.sc-ft{display:flex;align-items:center;gap:12px;padding-top:16px;border-top:1px solid var(--g100);flex-wrap:wrap;margin-top:16px}
-.sc-map{display:inline-flex;align-items:center;gap:6px;color:var(--r600);font-size:12.5px;font-weight:600;text-decoration:none;transition:all .2s}
-.sc-map:hover{color:var(--r800)}
-
-/* BIG CTA */
-.cta{position:relative;overflow:hidden;border-radius:28px;background:linear-gradient(145deg,#1a0000,var(--r900) 40%,var(--r800) 70%,#450a0a);padding:60px 32px;text-align:center}
-.cta::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(239,68,68,.2),transparent 60%)}
-.cta::after{content:'';position:absolute;inset:0;opacity:.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-.cta>*{position:relative;z-index:2}
-.cta-logo{width:72px;height:72px;border-radius:18px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;overflow:hidden;animation:glow 3s infinite}
-.cta-logo img{width:100%;height:100%;object-fit:contain}
-.cta .tag{display:inline-block;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);padding:6px 18px;border-radius:100px;font-size:13px;font-weight:700;color:var(--r300);margin-bottom:20px}
-.cta h3{font-family:var(--d);font-size:clamp(24px,4vw,36px);font-weight:900;color:#fff;margin-bottom:8px}
-.cta>p{color:rgba(255,255,255,.6);font-size:15px;max-width:520px;margin:0 auto 32px;line-height:1.7}
-.cta-acts{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
-.cta-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:12px;font-size:15px;font-weight:700;text-decoration:none;border:none;cursor:pointer;font-family:var(--f);transition:all .3s}
-.cta-btn.wh{background:#fff;color:var(--r700)}
-.cta-btn.wh:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.25)}
-.cta-btn.wa{background:#25d366;color:#fff}
-.cta-btn.wa:hover{background:#1da851;transform:translateY(-3px)}
-.cta-info{display:flex;justify-content:center;gap:28px;margin-top:24px;flex-wrap:wrap}
-.cta-info a{display:flex;align-items:center;gap:6px;color:rgba(255,255,255,.6);font-size:13px;font-weight:500;text-decoration:none;transition:color .2s}
-.cta-info a:hover{color:#fff}
-.yk-map{border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.1);height:200px;position:relative;margin-top:24px}
-.yk-map iframe{width:100%;height:100%;border:0}
-.yk-map-btn{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--g200);padding:8px 16px;border-radius:10px;font-size:12px;font-weight:600;color:var(--g700);text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,.1);z-index:4;transition:all .2s}
-.yk-map-btn:hover{background:var(--r50);color:var(--r700)}
-
-/* FOOTER */
-.ft{background:var(--g900);color:var(--g400);padding:48px 20px 110px}
-.ft-in{max-width:1200px;margin:0 auto;text-align:center}
-.ft-b{font-family:var(--d);font-size:22px;font-weight:900;color:#fff;margin-bottom:6px}
-.ft-d{font-size:13px;max-width:480px;margin:0 auto 20px;line-height:1.7}
-.ft-lk{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:20px}
-.ft-lk a{color:var(--g400);text-decoration:none;font-size:13px;font-weight:500;transition:color .2s}
-.ft-lk a:hover{color:#fff}
-.ft-c{font-size:11px;color:var(--g500);border-top:1px solid rgba(255,255,255,.06);padding-top:20px}
-
-/* DOCK */
-.dk{position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);backdrop-filter:blur(16px);border-top:1px solid var(--g200);padding:8px 12px calc(8px + env(safe-area-inset-bottom));display:none;gap:8px;box-shadow:0 -4px 20px rgba(0,0,0,.08)}
-.dk-b{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;padding:12px;border-radius:12px;font-size:14px;font-weight:700;text-decoration:none;border:none;cursor:pointer;font-family:var(--f);transition:all .2s}
-.dk-b.c{background:var(--r600);color:#fff}
-.dk-b.w{background:#25d366;color:#fff}
-@media(max-width:768px){.dk{display:flex}}
-
-/* MODAL */
-.mb{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px;animation:fadeIn .2s}
-.mx{background:#fff;border-radius:28px;width:100%;max-width:460px;box-shadow:0 40px 80px rgba(0,0,0,.25);animation:bounceIn .5s cubic-bezier(.22,1,.36,1);max-height:90vh;overflow-y:auto}
-.mh{padding:28px 28px 0;display:flex;align-items:flex-start;justify-content:space-between}
-.mh h3{font-family:var(--d);font-size:24px;font-weight:900;color:var(--g900)}
-.mh p{font-size:13px;color:var(--g400);margin-top:4px;line-height:1.5}
-.mc{background:var(--g100);border:none;width:36px;height:36px;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--g500);transition:all .2s;flex-shrink:0}
-.mc:hover{background:var(--g200)}
-.mbd{padding:24px 28px 28px}
-.fg{margin-bottom:14px}
-.fl{display:block;font-size:12.5px;font-weight:600;color:var(--g600);margin-bottom:5px}
-.fl .rq{color:var(--r500)}
-.fi{width:100%;padding:11px 14px;border:2px solid var(--g200);border-radius:12px;font-size:14px;font-family:var(--f);transition:all .2s;outline:none;background:var(--g50)}
-.fi:focus{border-color:var(--r500);background:#fff;box-shadow:0 0 0 4px rgba(220,38,38,.08)}
-.fi.err{border-color:var(--r500)}
-.fsel{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:40px}
-.fsb{width:100%;padding:13px;border:none;background:linear-gradient(135deg,var(--r600),var(--r700));color:#fff;font-size:15px;font-weight:700;border-radius:12px;cursor:pointer;font-family:var(--f);transition:all .3s;margin-top:6px}
-.fsb:hover{background:linear-gradient(135deg,var(--r700),var(--r800));transform:translateY(-1px);box-shadow:0 8px 24px rgba(220,38,38,.3)}
-.fok{text-align:center;padding:40px 20px}
-.fok-ic{width:64px;height:64px;border-radius:50%;background:var(--grn50);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;color:var(--grn700);animation:bounceIn .6s}
-.fok h4{font-size:20px;font-weight:800;color:var(--g900);margin-bottom:8px}
-.fok p{font-size:13px;color:var(--g400);line-height:1.6}
-
-@media(max-width:600px){.sc-img{height:180px}.sc-body{padding:20px}.cta{padding:40px 20px;border-radius:20px}}
-`;
-
-// ── SCHEMA ────────────────────────────────────────────
-function Schema(){
-  const o=schools.map(s=>({"@context":"https://schema.org","@type":"EducationalOrganization",name:s.name+(s.subtitle?` (${s.subtitle})`:""),address:{"@type":"PostalAddress",streetAddress:s.address,addressLocality:"Yenimahalle",addressRegion:"Ankara",addressCountry:"TR"},description:s.projectType}));
-  const b={"@context":"https://schema.org","@type":["LocalBusiness","ProfessionalService"],name:"Yıldız Kurs",telephone:"+903123460633",url:"https://yildizkurs.com.tr",address:{"@type":"PostalAddress",streetAddress:Y.addr,addressLocality:"Yenimahalle",addressRegion:"Ankara",addressCountry:"TR"},geo:{"@type":"GeoCoordinates",latitude:39.9852817,longitude:32.771865}};
-  return <>{o.map((x,i)=><script key={i} type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(x)}}/>)}<script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(b)}}/></>;
-}
-
-// ── OKUL KARTI ────────────────────────────────────────
-function Card({s,i}){
-  const cd=getCD(s.examDate);
-  const[r,v]=useReveal();
-  return(
-    <div ref={r} style={{opacity:v?1:0,transform:v?"translateY(0)":"translateY(56px)",transition:`all .7s cubic-bezier(.22,1,.36,1) ${i*.06}s`}}>
-      <article className="sc">
-        <div className="sc-img">
-          <img src={s.img} alt={s.name} loading={i<2?"eager":"lazy"}/>
-          <div className="sc-ov"/>
-          <div className="sc-num">#{i+1}</div>
-          {s.examRuleType&&<div className="sc-badges"><div className={`sc-rb ${s.examRuleType}`}>{s.examRuleType==="safe"?<><Ic.Check s={12}/> Yanlış Götürmez</>:<><Ic.Alert s={12}/> 3 Yanlış=1 Doğru</>}</div></div>}
-          <div className="sc-imt"><h2>{s.name}</h2>{s.subtitle&&<span>{s.subtitle}</span>}</div>
-        </div>
-        <div className="sc-body">
-          <div className="sc-proj"><Ic.Grad/> {s.projectType}</div>
-          <div className="sc-grid">
-            <div className="sc-item"><div className="sc-ico"><Ic.Users/></div><div><div className="sc-lbl">Öğrenci Profili</div><div className="sc-val">{s.studentProfile}</div>{s.quota&&<div className="sc-val red">Kontenjan: {s.quota}</div>}</div></div>
-            <div className="sc-item"><div className="sc-ico"><Ic.Cal/></div><div><div className="sc-lbl">Başvuru Tarihleri</div><div className="sc-val">{s.applicationDates}</div></div></div>
-            <div className="sc-item"><div className="sc-ico"><Ic.Clock/></div><div><div className="sc-lbl">Sınav Tarihi</div><div className="sc-val">{s.examDate}</div>{cd&&<div className="cd-row"><div className="cd-it"><div className="cd-n">{cd.d}</div><div className="cd-l">Gün</div></div><div className="cd-it"><div className="cd-n">{cd.h}</div><div className="cd-l">Saat</div></div></div>}</div></div>
-            <div className="sc-item"><div className="sc-ico"><Ic.File/></div><div><div className="sc-lbl">Sınav İçeriği</div><div className="sc-val">{s.examContent}</div></div></div>
-          </div>
-          {s.examRule&&<div className={`sc-rule ${s.examRuleType}`}>{s.examRuleType==="danger"?<Ic.Alert/>:<Ic.Check/>}{s.examRule}</div>}
-          {s.subjects.length>0&&<div><div className="ex-t">Sınav Dağılımı {s.total&&`(${s.total} Soru${s.dur?` / ${s.dur}`:""})`}</div><div className="ex-bar">{s.subjects.map(x=><div key={x.n} className="ex-seg" style={{flex:x.c,background:x.cl}}>{x.c}</div>)}</div><div className="ex-leg">{s.subjects.map(x=><div key={x.n} className="ex-li"><div className="ex-dot" style={{background:x.cl}}/>{x.n} ({x.c})</div>)}</div></div>}
-          <div className="sc-ft"><a href={s.mapsLink} target="_blank" rel="noopener noreferrer" className="sc-map"><Ic.Map/> {s.address} <Ic.Ext/></a></div>
-        </div>
-      </article>
-    </div>
-  );
-}
-
-// ── MODAL ─────────────────────────────────────────────
-function Modal({open,onClose}){
-  const[f,sF]=useState({name:"",surname:"",phone:"",grade:""});
-  const[ok,sO]=useState(false);
-  const[e,sE]=useState({});
-  if(!open)return null;
-  const val=()=>{const er={};if(!f.name.trim())er.name=1;if(!f.surname.trim())er.surname=1;if(!f.phone.trim()||f.phone.replace(/\D/g,"").length<10)er.phone=1;if(!f.grade)er.grade=1;sE(er);return!Object.keys(er).length};
-  return(
-    <div className="mb" onClick={ev=>{if(ev.target===ev.currentTarget)onClose()}}>
-      <div className="mx">
-        {!ok?<><div className="mh"><div><h3>Hemen Bilgi Alın</h3><p>Yenimahalle'nin 1 numarası Yıldız Kurs ile sınav hazırlığına başlayın.</p></div><button className="mc" onClick={onClose}><Ic.X/></button></div>
-        <div className="mbd">
-          <div className="fg"><label className="fl">Ad <span className="rq">*</span></label><input className={`fi ${e.name?"err":""}`} placeholder="Veli adı" value={f.name} onChange={x=>sF({...f,name:x.target.value})}/></div>
-          <div className="fg"><label className="fl">Soyad <span className="rq">*</span></label><input className={`fi ${e.surname?"err":""}`} placeholder="Veli soyadı" value={f.surname} onChange={x=>sF({...f,surname:x.target.value})}/></div>
-          <div className="fg"><label className="fl">Telefon <span className="rq">*</span></label><input className={`fi ${e.phone?"err":""}`} placeholder="05XX XXX XX XX" type="tel" value={f.phone} onChange={x=>sF({...f,phone:x.target.value})}/></div>
-          <div className="fg"><label className="fl">Öğrenci Sınıfı <span className="rq">*</span></label><select className={`fi fsel ${e.grade?"err":""}`} value={f.grade} onChange={x=>sF({...f,grade:x.target.value})}><option value="">Sınıf seçiniz</option>{[3,4,5,6,7,8].map(g=><option key={g} value={g}>{g}. Sınıf</option>)}</select></div>
-          <button className="fsb" onClick={()=>{if(val())sO(true)}}>Hemen Bilgi Al</button>
-        </div></>:
-        <div className="fok"><div className="fok-ic"><Ic.Check s={32}/></div><h4>Başvurunuz Alındı!</h4><p>Yıldız Kurs ekibimiz en kısa sürede sizinle iletişime geçecektir.</p><button className="fsb" style={{marginTop:20,maxWidth:200,marginLeft:"auto",marginRight:"auto"}} onClick={onClose}>Tamam</button></div>}
-      </div>
-    </div>
-  );
-}
-
-// ── ANA UYGULAMA ──────────────────────────────────────
-export default function App(){
-  const[m,sM]=useState(false);
-  return(
-    <>
-      <style>{CSS}</style>
-      <Schema/>
-
-      {/* HEADER — logo: yildiz-kurs.png */}
-      <header className="hd"><div className="hd-in">
-        <a href="#" className="hd-logo">
-          <div className="hd-logo-img"><img src="yildiz-kurs.png" alt="Yıldız Kurs"/></div>
-          <div className="hd-txt">Yenimahalle<br/><b>Proje Okulları</b></div>
-        </a>
-        <nav className="hd-nav"><a href="#okullar">Okullar</a><a href="#yildiz-kurs">Yıldız Kurs</a><a href="#iletisim">İletişim</a></nav>
-        <button className="hd-cta" onClick={()=>sM(true)}>Hemen Bilgi Al</button>
-      </div></header>
-
-      {/* HERO */}
-      <section className="hero"><div className="hero-gr"/><div className="hero-in">
-        <div className="hero-badge"><div className="hero-dot"/> 2026 Başvuruları Açık</div>
-        <h1>Yenimahalle Proje Okulları<br/>Başvuru ve <em>Sınav Rehberi</em></h1>
-        <p className="hero-sub">Tevfik İleri, Şehit Ömer Halisdemir ve Yenimahalle'deki tüm proje ortaokullarının sınav takvimi, kontenjan ve başvuru detaylarına tek sayfadan ulaşın.</p>
-        <div className="hero-stats"><div><div className="hs-n">6</div><div className="hs-l">Proje Okulu</div></div><div><div className="hs-n">2026</div><div className="hs-l">Sınav Yılı</div></div><div><div className="hs-n">500+</div><div className="hs-l">Kontenjan</div></div></div>
-      </div></section>
-
-      {/* ÜST YK BANNER — logo: yildiz-kurs.png */}
-      <div style={{padding:"20px 20px 0",maxWidth:1240,margin:"0 auto"}}>
-        <Reveal><div className="yb">
-          <div className="yb-l">
-            <div className="yb-logo"><img src="yildiz-kurs.png" alt="Yıldız Kurs"/></div>
-            <div className="yb-t"><strong><Ic.Trophy s={16}/> Proje Okullarına Hazırlıkta Yenimahalle'nin 1 Numarası</strong><p>Yıldız Kurs uzman kadrosuyla sınav başarısını yakalayın.</p></div>
-          </div>
-          <div className="yb-r">
-            <button className="yb-btn w" onClick={()=>sM(true)}>Hemen Bilgi Al <Ic.Arr/></button>
-            <a href={Y.waLink} target="_blank" rel="noopener noreferrer" className="yb-btn g"><Ic.WA s={14}/> WhatsApp</a>
-          </div>
-        </div></Reveal>
-      </div>
-
-      {/* OKULLAR */}
-      <section className="sec" id="okullar">
-        <div className="sec-hd">
-          <Reveal><div className="sec-tag">Okul Rehberi</div></Reveal>
-          <Reveal delay={0.1}><h2 className="sec-t">Yenimahalle Proje Okulları</h2></Reveal>
-          <Reveal delay={0.15}><p className="sec-d">Bölgedeki 6 proje ortaokulunun detaylı sınav bilgileri, başvuru tarihleri ve kontenjan durumları.</p></Reveal>
-        </div>
-        <div className="scs">{schools.map((s,i)=><Card key={s.id} s={s} i={i}/>)}</div>
-      </section>
-
-      {/* ALT BÜYÜK CTA — logo: yildiz-kurs.png */}
-      <div style={{padding:"0 20px 20px",maxWidth:1240,margin:"0 auto"}} id="yildiz-kurs">
-        <Reveal><div className="cta">
-          <div className="cta-logo"><img src="yildiz-kurs.png" alt="Yıldız Kurs"/></div>
-          <div className="tag">Yenimahalle'nin 1 Numarası</div>
-          <h3>Proje Okullarına Hazırlıkta<br/>Yıldız Kurs Farkı</h3>
-          <p>Uzman kadromuz, özel müfredatımız ve yılların tecrübesiyle çocuğunuzu proje okulu sınavlarına en iyi şekilde hazırlıyoruz.</p>
-          <div className="cta-acts">
-            <button className="cta-btn wh" onClick={()=>sM(true)}><Ic.Phone s={16}/> Hemen Bilgi Al</button>
-            <a href={Y.waLink} target="_blank" rel="noopener noreferrer" className="cta-btn wa"><Ic.WA s={16}/> WhatsApp ile Yazın</a>
-          </div>
-          <div className="cta-info" id="iletisim">
-            <a href={Y.tel}><Ic.Phone s={14}/> {Y.phone}</a>
-            <a href={Y.web} target="_blank" rel="noopener noreferrer"><Ic.Ext s={14}/> yildizkurs.com.tr</a>
-            <a href={Y.map} target="_blank" rel="noopener noreferrer"><Ic.Map s={14}/> {Y.addr}</a>
-          </div>
-          <div className="yk-map">
-            <iframe src={Y.embed} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="Yıldız Kurs"/>
-            <a href={Y.map} target="_blank" rel="noopener noreferrer" className="yk-map-btn"><Ic.Map/> Google Maps'te Aç</a>
-          </div>
-        </div></Reveal>
-      </div>
-
-      {/* FOOTER */}
-      <footer className="ft"><div className="ft-in">
-        <div className="ft-b">YenimahalleProjeOkullari.com</div>
-        <p className="ft-d">Yenimahalle proje ortaokullarının sınav bilgileri, başvuru tarihleri ve hazırlık rehberi. Yıldız Kurs sponsorluğuyla hazırlanmıştır.</p>
-        <div className="ft-lk"><a href="#okullar">Okullar</a><a href="#yildiz-kurs">Yıldız Kurs</a><a href={Y.waLink} target="_blank" rel="noopener noreferrer">WhatsApp</a><a href={Y.tel}>İletişim</a></div>
-        <div className="ft-c">© 2026 YenimahalleProjeOkullari.com — Tüm hakları saklıdır. Yıldız Kurs tarafından desteklenmektedir.</div>
-      </div></footer>
-
-      {/* MOBİL DOCK */}
-      <div className="dk">
-        <a href={Y.tel} className="dk-b c"><Ic.Phone/> Hemen Ara</a>
-        <a href={Y.waLink} target="_blank" rel="noopener noreferrer" className="dk-b w"><Ic.WA/> WhatsApp</a>
-      </div>
-
-      <Modal open={m} onClose={()=>sM(false)}/>
-    </>
-  );
-}
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
