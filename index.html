@@ -1,149 +1,1507 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yenimahalle Proje Okulları Başvuru Rehberi 2026</title>
-    <link rel="icon" href="yildiz-kurs.png">
-    <meta name="description" content="Tevfik İleri, Şehit Ömer Halisdemir ve Yenimahalle proje okulları 2026 sınav rehberi.">
-    
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Crimson+Pro:wght@800;900&display=swap');
-        :root { --r600: #dc2626; --r700: #b91c1c; }
-        body { font-family: 'Outfit', sans-serif; background: #fafafa; }
-        .serif { font-family: 'Crimson Pro', serif; }
-        .sc-card { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .sc-card:hover { transform: translateY(-8px); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15); }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yenimahalle Proje Okulları Sınav Rehberi 2026 | Sınav Takvimi ve Başvuru Detayları</title>
+  <meta name="description" content="Tevfik İleri, Şehit Ömer Halisdemir ve Yenimahalle'deki tüm proje ortaokullarının 2026 sınav takvimi, kontenjan, başvuru detayları ve çıkmış soruları burada. Yıldız Kurs rehberliğiyle sınav başarısını yakalayın." />
+  <meta name="keywords" content="Ankara proje okulları sınavları, ortaokul kabul sınavları 2026, LGS hazırlık Yenimahalle, hafızlık proje okulları Ankara, ücretsiz deneme sınavı Yenimahalle" />
+  <meta property="og:title" content="Yenimahalle Proje Okulları Sınav Rehberi 2026" />
+  <meta property="og:description" content="Yenimahalle'deki tüm proje ortaokullarının 2026 sınav takvimi ve başvuru rehberi." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/png" href="yildiz-kurs.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "LocalBusiness",
+        "@id": "https://yildizkurs.com.tr",
+        "name": "Yıldız Kurs",
+        "description": "Yenimahalle Proje Okullarına Hazırlıkta 1 Numara",
+        "telephone": "+903123460633",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Aşağı Yahyalar Mah. 994 Cad. No: 6/A",
+          "addressLocality": "Yenimahalle",
+          "addressRegion": "Ankara",
+          "addressCountry": "TR"
+        },
+        "url": "https://yildizkurs.com.tr"
+      },
+      {
+        "@type": "EducationalOrganization",
+        "name": "Tevfik İleri Anadolu İmam Hatip Lisesi",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Emniyet Mah. Silahtar Cad. No:13",
+          "addressLocality": "Yenimahalle",
+          "addressRegion": "Ankara"
+        }
+      },
+      {
+        "@type": "EducationalOrganization",
+        "name": "Şehit Ömer Halisdemir Anadolu İmam Hatip Lisesi",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Serhat Mah. 1290. Sokak No:8/A",
+          "addressLocality": "Yenimahalle",
+          "addressRegion": "Ankara"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --red: #C8102E;
+      --red-dark: #9e0b22;
+      --red-light: #ff1a3e;
+      --white: #ffffff;
+      --bg: #f8f7f5;
+      --surface: #ffffff;
+      --surface2: #f2f1ef;
+      --text: #141414;
+      --text-muted: #666;
+      --border: #e5e3df;
+      --shadow: 0 4px 24px rgba(0,0,0,0.08);
+      --shadow-hover: 0 16px 48px rgba(200,16,46,0.18);
+      --radius: 16px;
+      --radius-sm: 10px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 20px;
+    }
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .logo-wrap img {
+      height: 44px;
+      width: auto;
+      object-fit: contain;
+    }
+    .logo-text {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--text);
+      line-height: 1.2;
+    }
+    .logo-text span { color: var(--red); display: block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+    .header-cta {
+      background: var(--red);
+      color: #fff;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      padding: 10px 18px;
+      border-radius: 50px;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.2s, transform 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+    .header-cta:hover { background: var(--red-dark); transform: translateY(-1px); }
+
+    /* HERO */
+    .hero {
+      background: var(--text);
+      position: relative;
+      overflow: hidden;
+      padding: 72px 20px 64px;
+      text-align: center;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(200,16,46,0.35) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-noise {
+      position: absolute;
+      inset: 0;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(200,16,46,0.2);
+      border: 1px solid rgba(200,16,46,0.4);
+      color: #ff7080;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 50px;
+      margin-bottom: 24px;
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero-badge::before { content: '★'; }
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.8rem, 5vw, 3.2rem);
+      color: #fff;
+      line-height: 1.15;
+      max-width: 780px;
+      margin: 0 auto 20px;
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+    h1 em {
+      color: var(--red-light);
+      font-style: normal;
+      position: relative;
+    }
+    .hero-sub {
+      color: rgba(255,255,255,0.65);
+      font-size: 1.05rem;
+      max-width: 580px;
+      margin: 0 auto 36px;
+      animation: fadeUp 0.7s 0.2s ease both;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp 0.7s 0.3s ease both;
+    }
+    .btn-primary {
+      background: var(--red);
+      color: #fff;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 14px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(200,16,46,0.4);
+    }
+    .btn-primary:hover { background: var(--red-dark); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(200,16,46,0.5); }
+    .btn-secondary {
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 14px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.2);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.18); }
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-top: 52px;
+      flex-wrap: wrap;
+      animation: fadeUp 0.7s 0.4s ease both;
+    }
+    .stat {
+      text-align: center;
+    }
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #fff;
+    }
+    .stat-num span { color: var(--red-light); }
+    .stat-label { color: rgba(255,255,255,0.5); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; }
+
+    /* SPONSOR BANNER TOP */
+    .sponsor-top {
+      background: linear-gradient(135deg, var(--red) 0%, #8a0018 100%);
+      padding: 18px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .sponsor-top::after {
+      content: '';
+      position: absolute;
+      right: -40px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 200px;
+      height: 200px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+    }
+    .sponsor-top-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .sponsor-top-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .sponsor-top-logo {
+      height: 50px;
+      width: auto;
+      object-fit: contain;
+      background: rgba(255,255,255,0.95);
+      padding: 6px 10px;
+      border-radius: 10px;
+    }
+    .sponsor-top-text h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fff;
+    }
+    .sponsor-top-text p {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.82rem;
+    }
+    .sponsor-top-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn-sponsor {
+      background: rgba(255,255,255,0.15);
+      border: 1.5px solid rgba(255,255,255,0.5);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.82rem;
+      padding: 8px 16px;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .btn-sponsor:hover { background: rgba(255,255,255,0.28); }
+    .btn-sponsor.white {
+      background: #fff;
+      color: var(--red);
+      border-color: #fff;
+    }
+    .btn-sponsor.white:hover { background: #ffe0e4; }
+
+    /* SECTION */
+    section { padding: 64px 20px; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--red);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .section-label::before { content: ''; display: block; width: 20px; height: 2px; background: var(--red); border-radius: 2px; }
+    h2 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .section-desc { color: var(--text-muted); font-size: 1rem; max-width: 540px; margin-bottom: 40px; }
+
+    /* SCHOOL CARDS */
+    .schools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .school-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s;
+      cursor: default;
+      animation: fadeUp 0.6s ease both;
+    }
+    .school-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-hover);
+    }
+    .school-card:nth-child(1) { animation-delay: 0.05s; }
+    .school-card:nth-child(2) { animation-delay: 0.1s; }
+    .school-card:nth-child(3) { animation-delay: 0.15s; }
+    .school-card:nth-child(4) { animation-delay: 0.2s; }
+    .school-card:nth-child(5) { animation-delay: 0.25s; }
+    .school-card:nth-child(6) { animation-delay: 0.3s; }
+
+    .card-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+      background: linear-gradient(135deg, #e8e6e2, #d0cec9);
+    }
+    .card-body { padding: 20px; }
+    .card-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(200,16,46,0.08);
+      color: var(--red);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 4px 10px;
+      border-radius: 50px;
+      margin-bottom: 12px;
+    }
+    h3 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      line-height: 1.35;
+      margin-bottom: 6px;
+    }
+    .card-project {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+    .card-divider { height: 1px; background: var(--border); margin: 16px 0; }
+
+    /* Info rows */
+    .info-row {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin-bottom: 10px;
+      font-size: 0.85rem;
+    }
+    .info-icon {
+      width: 22px;
+      height: 22px;
+      min-width: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--surface2);
+      border-radius: 6px;
+      font-size: 0.75rem;
+      margin-top: 1px;
+    }
+    .info-label { color: var(--text-muted); font-size: 0.75rem; }
+    .info-value { color: var(--text); font-weight: 500; }
+
+    /* Warning badge */
+    .warn-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #fff3cd, #ffe8a0);
+      border: 1px solid #f0c030;
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      margin: 12px 0;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #7a5200;
+    }
+    .warn-badge::before { content: '⚠️'; font-size: 1rem; }
+
+    /* Quota pills */
+    .quota-wrap { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
+    .quota-pill {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      color: var(--text);
+    }
+
+    /* Subject pills */
+    .subjects-wrap { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+    .subj-pill {
+      background: rgba(200,16,46,0.07);
+      color: var(--red-dark);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 50px;
+      border: 1px solid rgba(200,16,46,0.15);
+    }
+
+    /* Map btn */
+    .map-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--red);
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 8px 14px;
+      border: 1.5px solid rgba(200,16,46,0.25);
+      border-radius: 50px;
+      margin-top: 14px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .map-btn:hover { background: rgba(200,16,46,0.06); border-color: var(--red); }
+    .map-btn svg { width: 14px; height: 14px; }
+
+    /* SPONSOR BANNER BOTTOM */
+    .sponsor-bottom {
+      background: var(--text);
+      border-radius: 24px;
+      padding: 48px 40px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      margin: 48px 0 0;
+    }
+    .sponsor-bottom::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, rgba(200,16,46,0.3) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .sponsor-bottom-logo {
+      height: 60px;
+      background: rgba(255,255,255,0.95);
+      padding: 8px 14px;
+      border-radius: 12px;
+      object-fit: contain;
+      margin-bottom: 20px;
+      display: block;
+    }
+    .sponsor-bottom h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+    .sponsor-bottom h3 em { color: var(--red-light); font-style: normal; }
+    .sponsor-bottom p { color: rgba(255,255,255,0.65); font-size: 0.9rem; margin-bottom: 24px; }
+    .sponsor-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .sponsor-contact { text-align: right; }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: flex-end;
+      margin-bottom: 12px;
+      text-decoration: none;
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    .contact-item .icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+    .icon.phone { background: rgba(200,16,46,0.3); }
+    .icon.wa { background: rgba(37,211,102,0.3); }
+    .icon.web { background: rgba(255,255,255,0.1); }
+    .icon.loc { background: rgba(255,200,0,0.2); }
+
+    /* YILDIZ MAP */
+    .map-section {
+      background: var(--surface);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      margin-top: 40px;
+    }
+    .map-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .map-header h4 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+    .map-click-wrap {
+      display: block;
+      position: relative;
+      overflow: hidden;
+    }
+    .map-placeholder {
+      width: 100%;
+      height: 280px;
+      background: linear-gradient(135deg, #e8e6e2 0%, #d5d3cf 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-decoration: none;
+    }
+    .map-placeholder:hover { background: linear-gradient(135deg, #dddbd7, #c8c6c2); }
+    .map-pin {
+      width: 48px;
+      height: 48px;
+      background: var(--red);
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      box-shadow: 0 4px 16px rgba(200,16,46,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .map-pin::after {
+      content: '★';
+      color: #fff;
+      font-size: 1.1rem;
+      transform: rotate(45deg);
+    }
+    .map-label { color: var(--text-muted); font-size: 0.85rem; font-weight: 500; }
+    .map-addr { color: var(--text-muted); font-size: 0.8rem; text-align: center; padding: 0 20px; }
+
+    /* MODAL */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(6px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--surface);
+      border-radius: 24px;
+      width: 100%;
+      max-width: 480px;
+      overflow: hidden;
+      animation: modalIn 0.35s cubic-bezier(0.34,1.56,0.64,1) both;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.35);
+    }
+    .modal-header {
+      background: linear-gradient(135deg, var(--red) 0%, #8a0018 100%);
+      padding: 28px 28px 24px;
+      position: relative;
+    }
+    .modal-header img {
+      height: 40px;
+      background: rgba(255,255,255,0.95);
+      padding: 5px 10px;
+      border-radius: 8px;
+      object-fit: contain;
+      margin-bottom: 14px;
+      display: block;
+    }
+    .modal-header h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.3;
+    }
+    .modal-header p { color: rgba(255,255,255,0.75); font-size: 0.85rem; margin-top: 6px; }
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      cursor: pointer;
+      color: #fff;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .modal-close:hover { background: rgba(255,255,255,0.28); }
+    .modal-body { padding: 28px; }
+    .form-group { margin-bottom: 16px; }
+    .form-label { display: block; font-size: 0.82rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+    .form-label span { color: var(--red); }
+    .form-input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text);
+      background: var(--surface);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+      appearance: none;
+    }
+    .form-input:focus { border-color: var(--red); box-shadow: 0 0 0 3px rgba(200,16,46,0.1); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .form-submit {
+      width: 100%;
+      background: var(--red);
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: var(--radius-sm);
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .form-submit:hover { background: var(--red-dark); transform: translateY(-1px); }
+    .form-note { text-align: center; font-size: 0.75rem; color: var(--text-muted); margin-top: 10px; }
+    .success-msg {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 40px 28px;
+      gap: 12px;
+    }
+    .success-icon {
+      width: 64px;
+      height: 64px;
+      background: rgba(200,16,46,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+    }
+    .success-msg h4 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+    .success-msg p { color: var(--text-muted); font-size: 0.85rem; }
+
+    /* MOBILE DOCK */
+    .mobile-dock {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      display: none;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border);
+      padding: 10px 16px 14px;
+      gap: 10px;
+    }
+    .dock-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 12px;
+      border-radius: 12px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .dock-btn:active { opacity: 0.75; }
+    .dock-btn.call { background: var(--red); color: #fff; }
+    .dock-btn.wa { background: #25D366; color: #fff; }
+    .dock-btn svg { width: 18px; height: 18px; }
+
+    /* FOOTER */
+    footer {
+      background: var(--text);
+      padding: 48px 20px 80px;
+      color: rgba(255,255,255,0.55);
+      font-size: 0.82rem;
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 28px;
+    }
+    .footer-logo { height: 44px; background: rgba(255,255,255,0.9); padding: 6px 10px; border-radius: 8px; object-fit: contain; }
+    .footer-copy { margin-top: 12px; }
+    .footer-links a { color: rgba(255,255,255,0.55); text-decoration: none; display: block; margin-bottom: 6px; }
+    .footer-links a:hover { color: #fff; }
+    .footer-title { color: rgba(255,255,255,0.85); font-weight: 600; margin-bottom: 10px; font-size: 0.88rem; }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(0.92) translateY(20px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* Scroll animations */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .mobile-dock { display: flex; }
+      .sponsor-bottom { grid-template-columns: 1fr; }
+      .sponsor-contact { text-align: left; }
+      .contact-item { justify-content: flex-start; }
+      footer { padding-bottom: 100px; }
+      .schools-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .hero { padding: 56px 20px 48px; }
+      .sponsor-top-inner { flex-direction: column; align-items: flex-start; }
+    }
+    @media (min-width: 769px) {
+      .header-cta { font-size: 0.88rem; }
+    }
+
+    /* Pulse animation for CTA */
+    @keyframes pulse-ring {
+      0% { box-shadow: 0 0 0 0 rgba(200,16,46,0.5); }
+      70% { box-shadow: 0 0 0 12px rgba(200,16,46,0); }
+      100% { box-shadow: 0 0 0 0 rgba(200,16,46,0); }
+    }
+    .pulse { animation: pulse-ring 2s infinite; }
+
+    /* Ticker */
+    .ticker-wrap {
+      background: var(--red);
+      overflow: hidden;
+      padding: 10px 0;
+      white-space: nowrap;
+    }
+    .ticker-content {
+      display: inline-block;
+      animation: ticker 30s linear infinite;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 0.05em;
+    }
+    .ticker-content span { margin: 0 32px; }
+    .ticker-dot { color: rgba(255,255,255,0.4); }
+    @keyframes ticker {
+      from { transform: translateX(100vw); }
+      to { transform: translateX(-100%); }
+    }
+
+    /* Number counter section */
+    .stats-bar {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 32px 20px;
+    }
+    .stats-bar-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      text-align: center;
+    }
+    .sbar-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--red);
+    }
+    .sbar-label { color: var(--text-muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
+    @media (max-width: 600px) {
+      .stats-bar-inner { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
 </head>
 <body>
-    <div id="root"></div>
 
-    <script type="text/babel">
-        const { useState, useEffect } = React;
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a class="logo-wrap" href="/">
+      <img src="yildiz-kurs.png" alt="Yıldız Kurs Logo" />
+      <div class="logo-text">
+        Yenimahalle
+        <span>Proje Okulları Rehberi</span>
+      </div>
+    </a>
+    <button class="header-cta pulse" onclick="openModal()">📋 Randevu Al</button>
+  </div>
+</header>
 
-        const SCHOOLS = [
-            { id:1, img:"okul1.jpg", name:"Tevfik İleri Anadolu İmam Hatip Lisesi", subtitle:"Ortaokul Bölümü",
-                projectType:"Akademik ve Yabancı Dil Projesi", 
-                examDate:"28 Haziran 2026 Pazar, 10:00",
-                applyDates:"23 Nisan - 23 Haziran 2026",
-                address:"Emniyet Mah. Silahtar Cad. No:13 Yenimahalle",
-                mapsLink:"https://www.google.com/maps/place/Tevfik+%C4%B0leri+Anadolu+%C4%B0mam+Hatip+Lisesi/@39.9431966,32.8219758,17z/data=!3m1!4b1!4m6!3m5!1s0x14d34ec459d437b9:0x27db3cf425b6f1ed!8m2!3d39.9431925!4d32.8245507!16s%2Fg%2F1vl5d3bf?entry=ttu&g_ep=EgoyMDI2MDQwNi4wIKXMDSoASAFQAw%3D%3D",
-                examContent:"100 Soru: Türkçe(20), Mat(20), Fen(20), Sosyal(20), Din(20)",
-                examRule:"Yanlışlar doğruyu götürmez.", ruleType:"safe" },
-            { id:2, img:"okul2.jpg", name:"Şehit Ömer Halisdemir AİHL", subtitle:"Ortaokul Bölümü",
-                projectType:"Hafızlık ve Dil Projesi",
-                examDate:"6 Haziran 2026",
-                applyDates:"23 Mart - 22 Mayıs 2026",
-                address:"Serhat Mah. 1290. Sokak No:8/A Yenimahalle",
-                mapsLink:"https://www.google.com/maps/place/%C5%9Eehit+%C3%96mer+Halisdemir+Anadolu+%C4%B0mam+Hatip+Lisesi/@39.9783601,32.7571562,17z/data=!3m1!4b1!4m6!3m5!1s0x14d3499cd78c8b19:0x400b0089e808c3a!8m2!3d39.978356!4d32.7597311!16s%2Fg%2F11c2j7333m?entry=ttu&g_ep=EgoyMDI2MDQwNi4wIKXMDSoASAFQAw%3D%3D",
-                examContent:"60 Soru + 10 Mantık Sorusu",
-                examRule:"3 Yanlış 1 Doğruyu Götürür.", ruleType:"danger" },
-            { id:3, img:"okul3.jpg", name:"Şehit Cengiz Polat AİHL", subtitle:"Ankara Teknoloji AİHL",
-                projectType:"Teknoloji ve Akademik Başarı Projesi",
-                examDate:"Haziran Sonu (Bekleniyor)",
-                applyDates:"Nisan - Haziran Dönemi",
-                address:"Varlık Mah. Eşref Bitlis Cad. No:10 Yenimahalle",
-                mapsLink:"https://www.google.com/maps/place/%C5%9Eehit+Cengiz+Polat+Anadolu+%C4%B0mam+Hatip+Lisesi+(YEN%C4%B0MAHALLE+-+ANKARA)/@39.9596806,32.8306903,17z/data=!3m1!4b1!4m6!3m5!1s0x14d34e98e78bfcd5:0x4a1bbbabe17bb584!8m2!3d39.9596765!4d32.8332652!16s%2Fg%2F11c1tswqmg?entry=ttu&g_ep=EgoyMDI2MDQwNi4wIKXMDSoASAFQAw%3D%3D",
-                examContent:"75 Soru / 100 Dakika",
-                examRule:"Yanlışlar doğruyu götürmez.", ruleType:"safe" },
-            { id:4, img:"okul4.jpg", name:"Şehit Demet Sezen Kız AİHL", subtitle:"Ortaokul Bölümü",
-                projectType:"Fen ve Sosyal Bilimler Projesi",
-                examDate:"7 Haziran 2026, 10:30",
-                applyDates:"1 Nisan - 4 Haziran 2026",
-                address:"Kentkoop Mah. 1867. Sk. No:5 Yenimahalle",
-                mapsLink:"https://www.google.com/maps/place/Bat%C4%B1kent+%C5%9Eehit+Demet+Sezen+K%C4%B1z+Anadolu+%C4%B0mam+Hatip+Lisesi/@39.9671992,32.7092835,17z/data=!3m1!4b1!4m6!3m5!1s0x14d3362219bd7ca9:0x9d2aa1b936b1b800!8m2!3d39.9671951!4d32.7118584!16s%2Fg%2F11c1p2trvp?entry=ttu&g_ep=EgoyMDI2MDQwNi4wIKXMDSoASAFQAw%3D%3D",
-                examContent:"60 Soru / 100 Dakika",
-                examRule:"3 Yanlış 1 Doğruyu Götürür.", ruleType:"danger" }
-        ];
+<!-- TICKER -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker-content">
+    <span>Tevfik İleri Sınav: 28 Haziran 2026</span>
+    <span class="ticker-dot">●</span>
+    <span>Şehit Ömer Halisdemir Başvuru: 22 Mayıs 2026'ya kadar</span>
+    <span class="ticker-dot">●</span>
+    <span>Batıkent Şehit Demet Sezen Sınav: 7 Haziran 2026</span>
+    <span class="ticker-dot">●</span>
+    <span>Yıldız Kurs — Yenimahalle'nin 1 Numarası</span>
+    <span class="ticker-dot">●</span>
+    <span>Tevfik İleri Sınav: 28 Haziran 2026</span>
+    <span class="ticker-dot">●</span>
+    <span>Şehit Ömer Halisdemir Başvuru: 22 Mayıs 2026'ya kadar</span>
+    <span class="ticker-dot">●</span>
+  </div>
+</div>
 
-        const App = () => {
-            const [modal, setModal] = useState(false);
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-noise"></div>
+  <div class="hero-badge">2026 Güncel Veri</div>
+  <h1>Yenimahalle Proje Okulları<br /><em>Başvuru ve Sınav Rehberi</em> (2026)</h1>
+  <p class="hero-sub">6 proje okulu, tüm sınav tarihleri, kontenjanlar ve başvuru detayları tek sayfada. Yıldız Kurs uzman rehberliğiyle hazırlanmıştır.</p>
+  <div class="hero-buttons">
+    <button class="btn-primary" onclick="document.getElementById('okullar').scrollIntoView({behavior:'smooth'})">Okullara Gözat ↓</button>
+    <a class="btn-secondary" href="tel:+903123460633">📞 Uzman Danışma</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">6<span>+</span></div><div class="stat-label">Proje Okulu</div></div>
+    <div class="stat"><div class="stat-num">2026</div><div class="stat-label">Güncel Takvim</div></div>
+    <div class="stat"><div class="stat-num">144<span>+</span></div><div class="stat-label">Kontenjan/Okul</div></div>
+    <div class="stat"><div class="stat-num">1<span>.</span></div><div class="stat-label">Yenimahalle'de</div></div>
+  </div>
+</section>
 
-            return (
-                <div className="min-h-screen">
-                    {/* Header */}
-                    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
-                        <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-                            <div className="flex items-center gap-3">
-                                <img src="yildiz-kurs.png" className="h-10" alt="Logo" />
-                                <div className="leading-tight">
-                                    <span className="block text-sm font-extrabold text-red-600">YENİMAHALLE</span>
-                                    <span className="text-xs font-bold text-gray-700">PROJE OKULLARI</span>
-                                </div>
-                            </div>
-                            <button onClick={() => setModal(true)} className="bg-red-600 text-white px-4 py-2 rounded-lg text-xs font-bold hover:bg-red-700 transition">BİLGİ AL</button>
-                        </div>
-                    </header>
+<!-- SPONSOR BANNER TOP -->
+<div class="sponsor-top">
+  <div class="sponsor-top-inner">
+    <div class="sponsor-top-left">
+      <img src="yildiz-kurs.png" alt="Yıldız Kurs" class="sponsor-top-logo" />
+      <div class="sponsor-top-text">
+        <h3>Yenimahalle'nin 1 Numarası — Yıldız Kurs</h3>
+        <p>Proje Okullarına Hazırlıkta 15+ Yıllık Tecrübe ve Garantili Başarı</p>
+      </div>
+    </div>
+    <div class="sponsor-top-actions">
+      <a href="tel:+903123460633" class="btn-sponsor">📞 Hemen Ara</a>
+      <button class="btn-sponsor white" onclick="openModal()">Randevu Al</button>
+    </div>
+  </div>
+</div>
 
-                    {/* Hero */}
-                    <section className="bg-gradient-to-br from-red-900 to-red-700 text-white py-16 px-4 text-center">
-                        <h1 className="serif text-4xl md:text-5xl font-black mb-4">2026 Sınav & Başvuru Rehberi</h1>
-                        <p className="max-w-2xl mx-auto opacity-80 text-sm md:text-base">Tüm proje okullarının güncel sınav takvimi ve içerikleri Yıldız Kurs sponsorluğuyla tek bir sayfada.</p>
-                    </section>
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-bar-inner">
+    <div><div class="sbar-num">15+</div><div class="sbar-label">Yıl Deneyim</div></div>
+    <div><div class="sbar-num">%94</div><div class="sbar-label">Yerleşme Oranı</div></div>
+    <div><div class="sbar-num">600+</div><div class="sbar-label">Mezun Öğrenci</div></div>
+    <div><div class="sbar-num">6</div><div class="sbar-label">Proje Okulu Rehberi</div></div>
+  </div>
+</div>
 
-                    {/* Schools */}
-                    <main className="max-w-6xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-2 gap-8">
-                        {SCHOOLS.map((s, i) => (
-                            <div key={s.id} className="sc-card bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm flex flex-col">
-                                <div className="h-48 bg-gray-200 relative">
-                                    <img src={s.img} className="w-full h-full object-cover" alt={s.name} />
-                                    <div className="absolute top-4 left-4 bg-red-600 text-white text-[10px] font-black px-2 py-1 rounded">#{i+1}</div>
-                                    <div className={`absolute top-4 right-4 text-[10px] font-bold px-2 py-1 rounded shadow-lg ${s.ruleType === 'safe' ? 'bg-green-500 text-white' : 'bg-amber-500 text-white'}`}>
-                                        {s.ruleType === 'safe' ? 'YANLIŞ GÖTÜRMEZ' : '3 YANLIŞ = 1 DOĞRU'}
-                                    </div>
-                                </div>
-                                <div className="p-6 flex-grow">
-                                    <h2 className="serif text-xl font-black text-gray-900 mb-1">{s.name}</h2>
-                                    <p className="text-red-600 text-xs font-bold mb-4 uppercase tracking-wider">{s.projectType}</p>
-                                    
-                                    <div className="space-y-3 text-sm text-gray-600">
-                                        <div className="flex justify-between border-b border-gray-50 pb-2">
-                                            <span className="font-bold">Sınav Tarihi:</span>
-                                            <span>{s.examDate}</span>
-                                        </div>
-                                        <div className="flex justify-between border-b border-gray-50 pb-2">
-                                            <span className="font-bold">İçerik:</span>
-                                            <span className="text-right">{s.examContent}</span>
-                                        </div>
-                                        <div className="flex justify-between">
-                                            <span className="font-bold">Adres:</span>
-                                            <span className="text-right text-xs">{s.address}</span>
-                                        </div>
-                                    </div>
-                                    
-                                    <div className="mt-6 flex gap-3">
-                                        <a href={s.mapsLink} target="_blank" className="flex-1 text-center py-3 bg-gray-50 text-gray-700 text-xs font-bold rounded-xl hover:bg-gray-100 transition">HARİTADA GÖR</a>
-                                        <button onClick={() => setModal(true)} className="flex-1 bg-red-600 text-white py-3 text-xs font-bold rounded-xl hover:bg-red-700 transition shadow-lg shadow-red-100">BAŞVURU YAP</button>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </main>
+<!-- SCHOOLS SECTION -->
+<section id="okullar">
+  <div class="container">
+    <div class="section-label">Proje Okulları 2026</div>
+    <h2>Yenimahalle'deki Tüm Proje Okulları</h2>
+    <p class="section-desc">Güncel sınav tarihleri, kontenjanlar ve başvuru detaylarıyla 6 proje okulu.</p>
 
-                    {/* Footer / Yıldız Kurs */}
-                    <footer className="bg-gray-900 text-white py-12 px-4">
-                        <div className="max-w-4xl mx-auto text-center">
-                            <img src="yildiz-kurs.png" className="h-16 mx-auto mb-6" alt="Yıldız Kurs" />
-                            <h3 className="serif text-2xl font-bold mb-4">Sınav Başarısı İçin Yıldız Kurs</h3>
-                            <p className="opacity-60 text-sm mb-8">Uzman kadromuz ve özel deneme kulübümüzle çocuğunuzu proje okullarına hazırlıyoruz.</p>
-                            <div className="flex flex-wrap justify-center gap-6 text-sm font-bold">
-                                <a href="tel:+903123460633" className="text-red-400">0312 346 06 33</a>
-                                <a href="https://wa.me/905324790668" target="_blank" className="text-green-400">WhatsApp: 0532 479 06 68</a>
-                            </div>
-                        </div>
-                    </footer>
-                </div>
-            );
-        };
+    <div class="schools-grid">
 
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
-    </script>
+      <!-- OKUL 1 -->
+      <div class="school-card reveal" id="okul1">
+        <img src="okul1.jpg" alt="Tevfik İleri Anadolu İmam Hatip Lisesi" class="card-img" loading="lazy" />
+        <div class="card-body">
+          <div class="card-tag">🏆 Yoğunlaştırılmış Akademik</div>
+          <h3>Tevfik İleri Anadolu İmam Hatip Lisesi (Ortaokul Bölümü)</h3>
+          <p class="card-project">Yoğunlaştırılmış Akademik Eğitim ve Yabancı Dil Projesi (İngilizce / Arapça)</p>
+          <div class="card-divider"></div>
+          <div class="info-row">
+            <div class="info-icon">👥</div>
+            <div>
+              <div class="info-label">Öğrenci Profili</div>
+              <div class="info-value">Karma (Kız ve Erkek — Ayrı Bölümler)</div>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon">📅</div>
+            <div>
+              <div class="info-label">Başvuru</div>
+              <div class="info-value">23 Nisan – 23 Haziran 2026 (18:00'e kadar)</div>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon">📝</div>
+            <div>
+              <div class="info-label">Sınav Tarihi</div>
+              <div class="info-value">28 Haziran 2026 Pazar — Saat 10:00</div>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon">📍</div>
+            <div>
+              <div class="info-label">Adres</div>
+              <div class="info-value">Emniyet Mah. Silahtar Cad. No:13 Yenimahalle/Ankara</div>
+            </div>
+          </div>
+          <div class="card-divider"></div>
+          <div class="info-label" style="margin-bottom:6px;">Sınav İçeriği — 100 Soru</div>
+          <div class="subjects-wrap">
+            <span class="subj-pill">Türkçe 20</span>
+            <span class="subj-pill">Matematik 20</span>
+            <span class="subj-pill">Fen 20</span>
+            <span class="subj-pill">Sosyal 20</span>
+            <span class="subj-pill">Din 20</span>
+          </div>
+          <div style="margin-top:10px;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.25);border-radius:8px;padding:8px 12px;font-size:0.8rem;color:#166534;font-weight:600;">
+            ✅ Yanlış soru sayısı doğru sayısını etkilemez.
+          </div>
+          <a href="https://www.google.com/maps/place/Tevfik+%C4%B0leri+Anadolu+%C4%B0mam+Hatip+Lisesi/@39.9431966,32.8219758,17z" target="_blank" rel="noopener" class="map-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Haritada Gör
+          </a>
+        </div>
+      </div>
+
+      <!-- OKUL 2 -->
+      <div class="school-card reveal" id="okul2">
+        <img src="okul2.jpg" alt="Şehit Ömer Halisdemir AİHL" class="card-img" loading="lazy" />
+        <div class="card-body">
+          <div class="card-tag">📖 Hafızlık + Yabancı Dil</div>
+          <h3>Şehit Ömer Halisdemir Anadolu İmam Hatip Lisesi (Ortaokul Bölümü)</h3>
+          <p class="card-project">Fen ve Sosyal Bilimler, Örgün Eğitimle Birlikte Hafızlık ve Yoğunlaştırılmış Yabancı Dil Projesi (İngilizce / Arapça)</p>
+          <div class="card-divider"></div>
+          <div class="info-row">
+            <div class="info-icon">👥</div>
+            <div>
+              <div class="info-label">Öğrenci Profili</div>
+              <div class="info-value">Karma (Ayrı Kontenjanlar)</div>
+            </div>
+          </div>
+          <div class="info-label" style="margin-bottom:6px;">2026–2027 Kontenjanı</div>
+          <div class="quota-wrap">
+            <span class="quota-pill">Hafızlık: 25 Kız / 25 Erkek</span>
+            <span class="quota-pill">Yabancı Dil: 65 Kız / 65 Erkek</span>
+          </div>
+          <div class="info-row" style="margin-top:10px;">
+            <div class="info-icon">📅</div>
+            <div>
+              <div class="info-label">Başvuru</div>
+              <div class="info-value">23 Mart – 22 Mayıs 2026</div>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon">📝</div>
+            <div>
+              <div class="info-label">Sınav Tarihi</div>
+              <div class="info-value">6 Haziran 2026 — Erkek: 09:30 | Kız: 14:00</div>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon">📍</div>
+            <div>
+              <div class="info-label">Adres</div>
+              <div class="info-value">Serhat Mah. 1290. Sokak No:8/A Yenimahalle/Ankara</div>
+            </div>
+          </div>
+          <div class="card-divider"></div>
+          <div class="info-label" style="margin-bottom:6px;">Sınav İçeriği — 60 Soru / 100 Dakika</div>
+          <div class="subjects-wrap">
+            <span class="subj-pill">Türkçe 15</span>
+            <span class="subj-pill">Matematik 20</span>
+            <span class="subj-pill">Fen 10</span>
+            <span class="subj-pill">Sosyal 5</span>
+            <span class="subj-pill">Din 5</span>
+            <span class="subj-pill">İngilizce 5</span>
+          </div>
+          <div class="warn-badge">3 yanlış 1 doğruyu götürür! Türkçe ve Matematik'te toplam 10 mantık sorusu bulunur.</div>
+          <a href="https://www.google.com/maps/place/%C5%9Eehit+%C3%96mer+Halisdemir+Anadolu+%C4%B0mam+Hatip+Lisesi/@39.9783601,32.7571562,17z" target="_blank" rel="noopener" class="map-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Haritada Gör
+          </a>
+        </div>
+      </div>
+
+      <!-- OKUL 3 -->
+      <div class="school-card reveal" id="okul3">
+        <img src="okul3.jpg" alt="Şehit Cengiz Polat AİHL" class="card-img" loading="lazy" />
+        <div class="card-body">
+          <div class="card-tag">💻 Teknoloji Projesi</div>
+          <h3>Şehit Cengiz Polat Anadolu İmam Hatip Lisesi (Ankara Teknoloji AİHL)</h3>
+          <p class="card-project">Teknoloji ve Akademik Başarı Proje Okulu</p>
+          <div class="card-divider"></div>
+          <div class="info-row">
+            <div class="info-icon">👥</div>
+            <div>
+              <div class="info-label">Öğrenci Profili</div>
+              <div class="info-value">Karma — 72 Kız, 72 Erkek (144 Öğrenci)</div>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon">📅</div>
+            <div>
+              <div class="info-label">Başvuru</div>
+              <div class="info-value">Nisan – Haziran dönemi (2026 takvimi bekleniyor)</div>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon">📝</div>
+            <div>
+              <div class="info-label">Sınav Tarihi</div>
+              <div class="info-value">Haziran sonu (2026 takvimi bekleniyor)</div>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon">📍</div>
+            <div>
+              <div class="info-label">Adres</div>
+              <div class="info-value">Varlık Mah. Eşref Bitlis Cad. No:10 B-Blok Yenimahalle/Ankara</div>
+            </div>
+          </div>
+          <div class="card-divider"></div>
+          <div class="info-label" style="margin-bottom:6px;">Sınav İçeriği — 75 Soru / 100 Dakika</div>
+          <div class="subjects-wrap">
+            <span class="subj-pill">Türkçe 15</span>
+            <span class="subj-pill">Matematik 15</span>
+            <span class="subj-pill">Fen 15</span>
+            <span class="subj-pill">Din 10</span>
+            <span class="subj-pill">Sosyal 10</span>
+            <span class="subj-pill">İngilizce 10</span>
+          </div>
+          <div style="margin-top:10px;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.25);border-radius:8px;padding:8px 12px;font-size:0.8rem;color:#166534;font-weight:600;">
+            ✅ Yanlışlar doğruyu götürmez; değerlendirme doğru cevaplar üzerinden yapılır.
+          </div>
+          <a href="https://www.google.com/maps/place/%C5%9Eehit+Cengiz+Polat+Anadolu+%C4%B0mam+Hatip+Lisesi+(YEN%C4%B0MAHALLE+-+ANKARA)/@39.9596806,32.8306903,17z" target="_blank" rel="noopener" class="map-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Haritada Gör
+          </a>
+        </div>
+      </div>
+
+      <!-- OKUL 4 -->
+      <div class="school-card reveal" id="okul4">
+        <img src="okul4.jpg" alt="Batıkent Şehit Demet Sezen Kız AİHL" class="card-img" loading="lazy" />
+        <div class="card-body">
+          <div class="card-tag">🔬 Fen ve Sosyal Bilimler</div>
+          <h3>Batıkent Şehit Demet Sezen Kız Anadolu İmam Hatip Lisesi (Ortaokul Bölümü)</h3>
+          <p class="card-project">Fen Bilimleri ve Sosyal Bilimler Proje Okulu</p>
+          <div class="card-divider"></div>
+          <div class="info-row">
+            <div class="info-icon">👥</div>
+            <div>
+              <div class="info-label">Öğrenci Profili</div>
+              <div class="info-value">Sadece Kız — 144 Öğrenci</div>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon">📅</div>
+            <div>
+              <div class="info-label">Başvuru</div>
+              <div class="info-value">01 Nisan – 04 Haziran 2026</div>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon">📝</div>
+            <div>
+              <div class="info-label">Sınav Tarihi</div>
+              <div class="info-value">07 Haziran 2026 Pazar — Saat 10:30</div>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon">📍</div>
+            <div>
+              <div class="info-label">Adres</div>
+              <div class="info-value">Kentkoop Mah. 1867. Sk. No:5 Yenimahalle/Ankara</div>
+            </div>
+          </div>
+          <div class="card-divider"></div>
+          <div class="info-label" style="margin-bottom:6px;">Sınav İçeriği — 60 Soru / 100 Dakika</div>
+          <div class="subjects-wrap">
+            <span class="subj-pill">Türkçe 15</span>
+            <span class="subj-pill">Matematik 20</span>
+            <span class="subj-pill">Fen 10</span>
+            <span class="subj-pill">Din 5</span>
+            <span class="subj-pill">Sosyal 5</span>
+            <span class="subj-pill">İngilizce 5</span>
+          </div>
+          <div class="warn-badge">3 yanlış 1 doğruyu götürür! 350 puan barajı uygulanır.</div>
+          <a href="https://www.google.com/maps/place/Bat%C4%B1kent+%C5%9Eehit+Demet+Sezen+K%C4%B1z+Anadolu+%C4%B0mam+Hatip+Lisesi/@39.9671992,32.7092835,17z" target="_blank" rel="noopener" class="map-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Haritada Gör
+          </a>
+        </div>
+      </div>
+
+      <!-- OKUL 5 -->
+      <div class="school-card reveal" id="okul5">
+        <img src="okul5.jpg" alt="Şehit Oğuzhan Yaşar AİHL" class="card-img" loading="lazy" />
+        <div class="card-body">
+          <div class="card-tag">📖 Hafızlık Projesi</div>
+          <h3>Şehit Oğuzhan Yaşar Anadolu İmam Hatip Lisesi (Ortaokul Bölümü)</h3>
+          <p class="card-project">Örgün Eğitimle Birlikte Hafızlık Projesi</p>
+          <div class="card-divider"></div>
+          <div class="info-row">
+            <div class="info-icon">👥</div>
+            <div>
+              <div class="info-label">Öğrenci Profili</div>
+              <div class="info-value">Karma (Kız ve Erkek — Ayrı Bölümler)</div>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon">📅</div>
+            <div>
+              <div class="info-label">Başvuru</div>
+              <div class="info-value">2026 Takvimi Bekleniyor (Nisan – Mayıs)</div>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon">📝</div>
+            <div>
+              <div class="info-label">Sınav</div>
+              <div class="info-value">2026 Takvimi Bekleniyor</div>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon">📍</div>
+            <div>
+              <div class="info-label">Adres</div>
+              <div class="info-value">İvedik Cd. No:454 Yenimahalle/Ankara</div>
+            </div>
+          </div>
+          <div class="card-divider"></div>
+          <div class="info-label" style="margin-bottom:8px;">Sınav İçeriği</div>
+          <div style="background:var(--surface2);border-radius:8px;padding:10px 12px;font-size:0.82rem;">
+            📚 <strong>Akademik Seviye Tespit Sınavı</strong> + 🎤 <strong>Hafızlık Kabul Mülakatı</strong>
+          </div>
+          <a href="https://www.google.com/maps/place/%C5%9Eehit+o%C4%9Fuzhan+ya%C5%9Far+imam+hatip+ortaokulu/@39.9840389,32.684463,17z" target="_blank" rel="noopener" class="map-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Haritada Gör
+          </a>
+        </div>
+      </div>
+
+      <!-- OKUL 6 -->
+      <div class="school-card reveal" id="okul6">
+        <img src="okul6.jpg" alt="Şehit Muhammed Ali Sarı İmam Hatip Ortaokulu" class="card-img" loading="lazy" />
+        <div class="card-body">
+          <div class="card-tag">📖 Hafızlık Projesi</div>
+          <h3>Şehit Muhammed Ali Sarı İmam Hatip Ortaokulu</h3>
+          <p class="card-project">Örgün Eğitimle Birlikte Hafızlık Projesi</p>
+          <div class="card-divider"></div>
+          <div class="info-row">
+            <div class="info-icon">👥</div>
+            <div>
+              <div class="info-label">Öğrenci Profili</div>
+              <div class="info-value">Karma (Kız ve Erkek — Ayrı Bölümler)</div>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon">📅</div>
+            <div>
+              <div class="info-label">Başvuru</div>
+              <div class="info-value">2026 Takvimi Bekleniyor (Nisan – Mayıs)</div>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon">📝</div>
+            <div>
+              <div class="info-label">Sınav</div>
+              <div class="info-value">2026 Takvimi Bekleniyor</div>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon">📍</div>
+            <div>
+              <div class="info-label">Adres</div>
+              <div class="info-value">Batı Sitesi Mah. 2307. Cadde No:4 Yenimahalle/Ankara</div>
+            </div>
+          </div>
+          <div class="card-divider"></div>
+          <div class="info-label" style="margin-bottom:8px;">Sınav İçeriği</div>
+          <div style="background:var(--surface2);border-radius:8px;padding:10px 12px;font-size:0.82rem;">
+            📚 <strong>Akademik Seviye Tespit Sınavı</strong> + 🎤 <strong>Hafızlık Yetenek Mülakatı</strong>
+          </div>
+          <a href="https://www.google.com/maps/place/%C5%9Eehit+Muhammed+Ali+Sar%C4%B1+%C4%B0mam+Hatip+Ortaokulu/@40.0353308,32.7799585,17z" target="_blank" rel="noopener" class="map-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Haritada Gör
+          </a>
+        </div>
+      </div>
+
+    </div><!-- /schools-grid -->
+
+    <!-- SPONSOR BOTTOM BANNER -->
+    <div class="sponsor-bottom reveal">
+      <div>
+        <img src="yildiz-kurs.png" alt="Yıldız Kurs" class="sponsor-bottom-logo" />
+        <h3>Proje Okullarına Hazırlıkta<br /><em>Yenimahalle'nin 1 Numarası</em></h3>
+        <p>15 yıllık deneyim, %94 yerleşme oranı ve uzman kadrosuyla çocuğunuzun hayalini gerçeğe dönüştürüyoruz.</p>
+        <div class="sponsor-actions">
+          <button class="btn-primary" onclick="openModal()">Randevu Al →</button>
+          <a href="tel:+903123460633" class="btn-secondary" style="color:#fff;border-color:rgba(255,255,255,0.3);">📞 0312 346 06 33</a>
+        </div>
+      </div>
+      <div class="sponsor-contact">
+        <a href="tel:+903123460633" class="contact-item">
+          <span>0312 346 06 33</span>
+          <span class="icon phone">📞</span>
+        </a>
+        <a href="https://wa.me/905324790668" target="_blank" rel="noopener" class="contact-item">
+          <span>WhatsApp: 0532 479 06 68</span>
+          <span class="icon wa">💬</span>
+        </a>
+        <a href="https://yildizkurs.com.tr" target="_blank" rel="noopener" class="contact-item">
+          <span>yildizkurs.com.tr</span>
+          <span class="icon web">🌐</span>
+        </a>
+        <a href="https://www.google.com/maps/place/Y%C4%B1ld%C4%B1z+Kurs/@39.9852817,32.771865,17z" target="_blank" rel="noopener" class="contact-item">
+          <span>Aşağı Yahyalar Mah. 994 Cad. No:6/A<br/>Yenimahalle / Ankara</span>
+          <span class="icon loc">📍</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- MAP -->
+    <div class="map-section reveal">
+      <div class="map-header">
+        <div>
+          <h4>📍 Yıldız Kurs Konumu</h4>
+          <p style="color:var(--text-muted);font-size:0.82rem;">Aşağı Yahyalar Mah. 994 Cad. No:6/A Yenimahalle/Ankara</p>
+        </div>
+        <a href="https://www.google.com/maps/place/Y%C4%B1ld%C4%B1z+Kurs/@39.9852817,32.771865,17z" target="_blank" rel="noopener" class="map-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Yol Tarifi Al
+        </a>
+      </div>
+      <a href="https://www.google.com/maps/place/Y%C4%B1ld%C4%B1z+Kurs/@39.9852817,32.771865,17z" target="_blank" rel="noopener" class="map-click-wrap">
+        <div class="map-placeholder">
+          <div class="map-pin"></div>
+          <div class="map-label">Yıldız Kurs — Haritada Gör</div>
+          <div class="map-addr">Tıklayarak Google Maps'te açın</div>
+        </div>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <img src="yildiz-kurs.png" alt="Yıldız Kurs" class="footer-logo" />
+      <p class="footer-copy" style="margin-top:12px;max-width:280px;">© 2026 YenimahalleProjeOkullari.com<br />Yıldız Kurs tarafından hazırlanmıştır.</p>
+    </div>
+    <div class="footer-links">
+      <div class="footer-title">Hızlı Bağlantılar</div>
+      <a href="#okul1">Tevfik İleri AİHL</a>
+      <a href="#okul2">Şehit Ömer Halisdemir AİHL</a>
+      <a href="#okul3">Şehit Cengiz Polat AİHL</a>
+      <a href="#okul4">Batıkent Şehit Demet Sezen</a>
+      <a href="#okul5">Şehit Oğuzhan Yaşar AİHL</a>
+      <a href="#okul6">Şehit Muhammed Ali Sarı</a>
+    </div>
+    <div>
+      <div class="footer-title">İletişim</div>
+      <a href="tel:+903123460633" class="footer-links" style="color:rgba(255,255,255,0.55)">📞 0312 346 06 33</a>
+      <a href="https://wa.me/905324790668" class="footer-links" style="color:rgba(255,255,255,0.55);text-decoration:none;display:block;margin-bottom:6px;">💬 0532 479 06 68</a>
+      <a href="https://yildizkurs.com.tr" class="footer-links" style="color:rgba(255,255,255,0.55);text-decoration:none;display:block;">🌐 yildizkurs.com.tr</a>
+    </div>
+  </div>
+</footer>
+
+<!-- MOBILE DOCK -->
+<div class="mobile-dock">
+  <a href="tel:+903123460633" class="dock-btn call">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .92h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.9a16 16 0 006.22 6.22l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+    Hemen Ara
+  </a>
+  <a href="https://wa.me/905324790668" target="_blank" rel="noopener" class="dock-btn wa">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    WhatsApp
+  </a>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="handleOverlayClick(event)">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-header">
+      <img src="yildiz-kurs.png" alt="Yıldız Kurs" />
+      <h3 id="modal-title">Proje Okullarına Hazırlıkta<br/>Yenimahalle'nin 1 Numarası</h3>
+      <p>Uzman danışmanlarımız sizi arasın, tüm sorularınızı yanıtlasın.</p>
+      <button class="modal-close" onclick="closeModal()" aria-label="Kapat">✕</button>
+    </div>
+    <div class="modal-body" id="modal-form-wrap">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="fname">Ad <span>*</span></label>
+          <input type="text" id="fname" class="form-input" placeholder="Adınız" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="lname">Soyad <span>*</span></label>
+          <input type="text" id="lname" class="form-input" placeholder="Soyadınız" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="phone">Telefon <span>*</span></label>
+        <input type="tel" id="phone" class="form-input" placeholder="0 (5__) ___ __ __" />
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="grade">Öğrenci Sınıfı <span>*</span></label>
+        <select id="grade" class="form-input">
+          <option value="">Sınıf Seçin</option>
+          <option>3. Sınıf</option>
+          <option>4. Sınıf</option>
+          <option>5. Sınıf</option>
+          <option>6. Sınıf</option>
+          <option>7. Sınıf</option>
+        </select>
+      </div>
+      <button class="form-submit" onclick="submitForm()">Randevu Talebini Gönder →</button>
+      <p class="form-note">📞 En kısa sürede uzmanlarımız sizi arayacak.</p>
+    </div>
+    <div class="success-msg" id="success-msg">
+      <div class="success-icon">✅</div>
+      <h4>Talebiniz Alındı!</h4>
+      <p>Yıldız Kurs danışmanlarımız en kısa sürede sizi arayacak. Teşekkürler!</p>
+      <button class="btn-primary" onclick="closeModal()" style="margin-top:8px;">Kapat</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Modal
+  function openModal() {
+    document.getElementById('modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function handleOverlayClick(e) {
+    if (e.target === document.getElementById('modal')) closeModal();
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  function submitForm() {
+    var fname = document.getElementById('fname').value.trim();
+    var lname = document.getElementById('lname').value.trim();
+    var phone = document.getElementById('phone').value.trim();
+    var grade = document.getElementById('grade').value;
+    if (!fname || !lname || !phone || !grade) {
+      alert('Lütfen tüm alanları doldurun.');
+      return;
+    }
+    document.getElementById('modal-form-wrap').style.display = 'none';
+    var s = document.getElementById('success-msg');
+    s.style.display = 'flex';
+  }
+
+  // Scroll reveal
+  var reveals = document.querySelectorAll('.reveal');
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(function(el) { observer.observe(el); });
+
+  // Smooth card entrance via IntersectionObserver for school cards
+  var cards = document.querySelectorAll('.school-card');
+  var cardObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.style.animationPlayState = 'running';
+        cardObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.05 });
+  cards.forEach(function(c) {
+    c.style.animationPlayState = 'paused';
+    cardObs.observe(c);
+  });
+</script>
+
 </body>
 </html>
