@@ -12,7 +12,7 @@
   <link rel="icon" type="image/png" href="yildiz-kurs.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Schema.org JSON-LD -->
   <script type="application/ld+json">
@@ -113,24 +113,28 @@
       text-decoration: none;
     }
     .logo-wrap img {
+      width: 96px;
       height: 44px;
-      width: auto;
+      padding: 4px 8px;
       object-fit: contain;
+      display: block;
     }
     .logo-text {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
       color: var(--text);
       line-height: 1.2;
+      letter-spacing: -0.01em;
     }
-    .logo-text span { color: var(--red); display: block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+    .logo-text span { color: var(--red); display: block; font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; margin-top: 2px; }
     .header-cta {
       background: var(--red);
       color: #fff;
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 0.82rem;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: -0.005em;
       padding: 10px 18px;
       border-radius: 50px;
       text-decoration: none;
@@ -170,9 +174,10 @@
       background: rgba(200,16,46,0.2);
       border: 1px solid rgba(200,16,46,0.4);
       color: #ff7080;
+      font-family: 'Inter', sans-serif;
       font-size: 0.75rem;
       font-weight: 600;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       padding: 6px 14px;
       border-radius: 50px;
@@ -181,12 +186,13 @@
     }
     .hero-badge::before { content: '★'; }
     h1 {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: clamp(1.8rem, 5vw, 3.2rem);
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: clamp(2rem, 5.5vw, 3.4rem);
+      letter-spacing: -0.025em;
       color: #fff;
-      line-height: 1.15;
-      max-width: 780px;
+      line-height: 1.08;
+      max-width: 820px;
       margin: 0 auto 20px;
       animation: fadeUp 0.7s 0.1s ease both;
     }
@@ -196,9 +202,13 @@
       position: relative;
     }
     .hero-sub {
-      color: rgba(255,255,255,0.65);
-      font-size: 1.05rem;
-      max-width: 580px;
+      font-family: 'Inter', sans-serif;
+      color: rgba(255,255,255,0.72);
+      font-size: 1.1rem;
+      font-weight: 400;
+      letter-spacing: -0.005em;
+      line-height: 1.55;
+      max-width: 600px;
       margin: 0 auto 36px;
       animation: fadeUp 0.7s 0.2s ease both;
     }
@@ -212,9 +222,10 @@
     .btn-primary {
       background: var(--red);
       color: #fff;
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
       font-size: 0.95rem;
+      letter-spacing: -0.005em;
       padding: 14px 28px;
       border-radius: 50px;
       text-decoration: none;
@@ -227,9 +238,10 @@
     .btn-secondary {
       background: rgba(255,255,255,0.1);
       color: #fff;
-      font-family: 'Syne', sans-serif;
-      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
       font-size: 0.95rem;
+      letter-spacing: -0.005em;
       padding: 14px 28px;
       border-radius: 50px;
       text-decoration: none;
@@ -250,88 +262,145 @@
       text-align: center;
     }
     .stat-num {
-      font-family: 'Syne', sans-serif;
-      font-size: 2rem;
-      font-weight: 800;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.1rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
       color: #fff;
     }
     .stat-num span { color: var(--red-light); }
-    .stat-label { color: rgba(255,255,255,0.5); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; }
+    .stat-label { font-family: 'Inter', sans-serif; color: rgba(255,255,255,0.55); font-size: 0.78rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; }
 
-    /* SPONSOR BANNER TOP */
+    /* SPONSOR BANNER TOP - PROFESSIONAL AD */
     .sponsor-top {
-      background: linear-gradient(135deg, var(--red) 0%, #8a0018 100%);
-      padding: 18px 20px;
+      background: linear-gradient(135deg, #1a0509 0%, #8a0018 50%, var(--red) 100%);
+      padding: 36px 24px;
       position: relative;
       overflow: hidden;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .sponsor-top::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 15% 50%, rgba(255,255,255,0.08) 0%, transparent 35%),
+        radial-gradient(circle at 85% 50%, rgba(255,26,62,0.25) 0%, transparent 40%);
+      pointer-events: none;
     }
     .sponsor-top::after {
       content: '';
       position: absolute;
-      right: -40px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 200px;
-      height: 200px;
-      background: rgba(255,255,255,0.05);
-      border-radius: 50%;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+      opacity: 0.05;
+      pointer-events: none;
     }
     .sponsor-top-inner {
       max-width: 1100px;
       margin: 0 auto;
-      display: flex;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
       align-items: center;
-      gap: 20px;
-      justify-content: space-between;
-      flex-wrap: wrap;
+      gap: 28px;
+      position: relative;
+      z-index: 2;
     }
-    .sponsor-top-left {
+    .sponsor-top-logo-wrap {
       display: flex;
       align-items: center;
-      gap: 16px;
+      justify-content: center;
+      width: 160px;
+      height: 84px;
+      padding: 14px 18px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+      flex-shrink: 0;
     }
     .sponsor-top-logo {
-      height: 50px;
-      width: auto;
+      width: 100%;
+      height: 100%;
       object-fit: contain;
-      background: rgba(255,255,255,0.95);
-      padding: 6px 10px;
-      border-radius: 10px;
+      display: block;
     }
-    .sponsor-top-text h3 {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.05rem;
-      font-weight: 800;
+    .sponsor-top-text {
       color: #fff;
     }
+    .sponsor-top-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      backdrop-filter: blur(8px);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 50px;
+      margin-bottom: 10px;
+    }
+    .sponsor-top-badge::before { content: '★'; color: #ffd700; }
+    .sponsor-top-text h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.15rem, 2.4vw, 1.55rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .sponsor-top-text h3 em {
+      font-style: normal;
+      color: #ffd700;
+      font-weight: 700;
+    }
     .sponsor-top-text p {
-      color: rgba(255,255,255,0.8);
-      font-size: 0.82rem;
+      font-family: 'Inter', sans-serif;
+      color: rgba(255,255,255,0.85);
+      font-size: 0.9rem;
+      font-weight: 400;
+      line-height: 1.5;
+      max-width: 480px;
     }
     .sponsor-top-actions {
       display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 8px;
+      flex-shrink: 0;
     }
     .btn-sponsor {
-      background: rgba(255,255,255,0.15);
-      border: 1.5px solid rgba(255,255,255,0.5);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.12);
+      border: 1.5px solid rgba(255,255,255,0.35);
+      backdrop-filter: blur(8px);
       color: #fff;
+      font-family: 'Inter', sans-serif;
       font-weight: 600;
-      font-size: 0.82rem;
-      padding: 8px 16px;
+      font-size: 0.88rem;
+      letter-spacing: -0.005em;
+      padding: 11px 20px;
       border-radius: 50px;
       text-decoration: none;
-      transition: background 0.2s;
+      transition: background 0.2s, transform 0.2s;
       white-space: nowrap;
+      min-width: 180px;
     }
-    .btn-sponsor:hover { background: rgba(255,255,255,0.28); }
+    .btn-sponsor:hover { background: rgba(255,255,255,0.22); transform: translateY(-1px); }
     .btn-sponsor.white {
       background: #fff;
-      color: var(--red);
+      color: var(--red-dark);
       border-color: #fff;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.18);
     }
-    .btn-sponsor.white:hover { background: #ffe0e4; }
+    .btn-sponsor.white:hover { background: #fff5f6; transform: translateY(-1px); box-shadow: 0 10px 28px rgba(0,0,0,0.25); }
 
     /* SECTION */
     section { padding: 64px 20px; }
@@ -356,6 +425,25 @@
       margin-bottom: 8px;
     }
     .section-desc { color: var(--text-muted); font-size: 1rem; max-width: 540px; margin-bottom: 40px; }
+
+    #okullar h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.7rem, 4vw, 2.5rem);
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+    }
+    #okullar .section-label {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+    }
+    #okullar .section-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.05rem;
+      letter-spacing: -0.005em;
+      line-height: 1.55;
+    }
 
     /* SCHOOL CARDS */
     .schools-grid {
@@ -501,74 +589,188 @@
     .map-btn:hover { background: rgba(200,16,46,0.06); border-color: var(--red); }
     .map-btn svg { width: 14px; height: 14px; }
 
-    /* SPONSOR BANNER BOTTOM */
+    /* SPONSOR BANNER BOTTOM - PREMIUM AD */
     .sponsor-bottom {
-      background: var(--text);
-      border-radius: 24px;
-      padding: 48px 40px;
+      background: linear-gradient(135deg, #0a1628 0%, #14233f 50%, #0a1628 100%);
+      border-radius: 28px;
+      padding: 56px 48px;
       display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 40px;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 48px;
       align-items: center;
       position: relative;
       overflow: hidden;
-      margin: 48px 0 0;
+      margin: 56px 0 0;
+      border: 1px solid rgba(255,215,0,0.15);
+      box-shadow: 0 24px 64px rgba(10,22,40,0.4);
     }
     .sponsor-bottom::before {
       content: '';
       position: absolute;
-      top: -60px;
-      right: -60px;
-      width: 280px;
-      height: 280px;
-      background: radial-gradient(circle, rgba(200,16,46,0.3) 0%, transparent 70%);
+      top: -80px;
+      right: -80px;
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(255,215,0,0.18) 0%, transparent 70%);
       pointer-events: none;
     }
+    .sponsor-bottom::after {
+      content: '';
+      position: absolute;
+      bottom: -60px;
+      left: -60px;
+      width: 240px;
+      height: 240px;
+      background: radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .sponsor-bottom > * { position: relative; z-index: 2; }
+    .sponsor-bottom-logo-wrap {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 180px;
+      height: 90px;
+      padding: 14px 20px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.35);
+      margin-bottom: 24px;
+    }
     .sponsor-bottom-logo {
-      height: 60px;
-      background: rgba(255,255,255,0.95);
-      padding: 8px 14px;
-      border-radius: 12px;
+      width: 100%;
+      height: 100%;
       object-fit: contain;
-      margin-bottom: 20px;
       display: block;
     }
-    .sponsor-bottom h3 {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: #fff;
-      line-height: 1.2;
-      margin-bottom: 10px;
+    .sponsor-bottom-tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,215,0,0.12);
+      border: 1px solid rgba(255,215,0,0.35);
+      color: #ffd700;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 50px;
+      margin-bottom: 14px;
     }
-    .sponsor-bottom h3 em { color: var(--red-light); font-style: normal; }
-    .sponsor-bottom p { color: rgba(255,255,255,0.65); font-size: 0.9rem; margin-bottom: 24px; }
-    .sponsor-actions { display: flex; gap: 10px; flex-wrap: wrap; }
-    .sponsor-contact { text-align: right; }
+    .sponsor-bottom-tagline::before { content: '★'; }
+    .sponsor-bottom h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.6rem, 3vw, 2rem);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .sponsor-bottom h3 em {
+      color: #ffd700;
+      font-style: normal;
+    }
+    .sponsor-bottom p {
+      font-family: 'Inter', sans-serif;
+      color: rgba(255,255,255,0.78);
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.6;
+      margin-bottom: 28px;
+      max-width: 520px;
+    }
+    .sponsor-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-wa-large {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #25D366;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: -0.005em;
+      padding: 14px 26px;
+      border-radius: 50px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 6px 24px rgba(37,211,102,0.4);
+    }
+    .btn-wa-large:hover { background: #128C7E; transform: translateY(-2px); box-shadow: 0 10px 32px rgba(37,211,102,0.55); }
+    .btn-wa-large svg { width: 18px; height: 18px; }
+    .btn-call-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: transparent;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: -0.005em;
+      padding: 14px 26px;
+      border-radius: 50px;
+      text-decoration: none;
+      border: 1.5px solid rgba(255,215,0,0.4);
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .btn-call-outline:hover { background: rgba(255,215,0,0.08); border-color: #ffd700; }
+    .btn-call-outline svg { width: 16px; height: 16px; }
+    .sponsor-contact {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding: 28px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      backdrop-filter: blur(8px);
+    }
     .contact-item {
       display: flex;
       align-items: center;
-      gap: 10px;
-      justify-content: flex-end;
-      margin-bottom: 12px;
+      gap: 14px;
       text-decoration: none;
       color: #fff;
-      font-size: 0.9rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.92rem;
       font-weight: 500;
+      letter-spacing: -0.005em;
+      transition: transform 0.2s;
     }
+    .contact-item:hover { transform: translateX(4px); }
     .contact-item .icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
+      width: 42px;
+      height: 42px;
+      min-width: 42px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1rem;
+      flex-shrink: 0;
     }
-    .icon.phone { background: rgba(200,16,46,0.3); }
-    .icon.wa { background: rgba(37,211,102,0.3); }
-    .icon.web { background: rgba(255,255,255,0.1); }
-    .icon.loc { background: rgba(255,200,0,0.2); }
+    .contact-item .icon svg { width: 20px; height: 20px; }
+    .icon.phone { background: rgba(200,16,46,0.18); color: #ff5870; }
+    .icon.wa { background: rgba(37,211,102,0.18); color: #25D366; }
+    .icon.web { background: rgba(255,215,0,0.15); color: #ffd700; }
+    .icon.loc { background: rgba(99,179,237,0.15); color: #63b3ed; }
+    .contact-item.wa-text { color: #25D366; font-weight: 600; }
+    .contact-item .label-small {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 2px;
+    }
+    .contact-item .value { display: block; }
 
     /* YILDIZ MAP */
     .map-section {
@@ -824,14 +1026,19 @@
     /* RESPONSIVE */
     @media (max-width: 768px) {
       .mobile-dock { display: flex; }
-      .sponsor-bottom { grid-template-columns: 1fr; }
-      .sponsor-contact { text-align: left; }
+      .sponsor-bottom { grid-template-columns: 1fr; padding: 40px 24px; }
+      .sponsor-contact { text-align: left; padding: 20px; }
       .contact-item { justify-content: flex-start; }
       footer { padding-bottom: 100px; }
       .schools-grid { grid-template-columns: 1fr; }
       .form-row { grid-template-columns: 1fr; }
       .hero { padding: 56px 20px 48px; }
-      .sponsor-top-inner { flex-direction: column; align-items: flex-start; }
+      .sponsor-top { padding: 28px 20px; }
+      .sponsor-top-inner { grid-template-columns: 1fr; text-align: center; gap: 18px; }
+      .sponsor-top-logo-wrap { margin: 0 auto; width: 150px; height: 76px; padding: 12px 16px; }
+      .sponsor-top-text p { margin-left: auto; margin-right: auto; }
+      .sponsor-top-actions { flex-direction: row; justify-content: center; flex-wrap: wrap; }
+      .btn-sponsor { min-width: auto; flex: 1; max-width: 200px; }
     }
     @media (min-width: 769px) {
       .header-cta { font-size: 0.88rem; }
@@ -893,6 +1100,22 @@
     @media (max-width: 600px) {
       .stats-bar-inner { grid-template-columns: repeat(2, 1fr); }
     }
+
+    .header-wa { background: #25D366 !important; box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4) !important; color: #fff !important; }
+    .header-wa:hover { background: #128C7E !important; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(37, 211, 102, 0.5) !important; }
+
+    /* Footer disclaimer */
+    .footer-disclaimer {
+      max-width: 1100px;
+      margin: 24px auto 0;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.65rem;
+      opacity: 0.6;
+      color: rgba(255,255,255,0.55);
+      text-align: center;
+      line-height: 1.5;
+    }
   </style>
 </head>
 <body>
@@ -904,10 +1127,10 @@
       <img src="yildiz-kurs.png" alt="Yıldız Kurs Logo" />
       <div class="logo-text">
         Yenimahalle
-        <span>Proje Okulları Rehberi</span>
+        <span>Proje Ortaokulları Hazırlık Kursu</span>
       </div>
     </a>
-    <button class="header-cta pulse" onclick="openModal()">📋 Randevu Al</button>
+    <a class="header-cta header-wa pulse" href="https://wa.me/905324790668?text=4.%20sınıf%20proje%20okullarına%20hazırlıkla%20ilgili%20bilgi%20alabilir%20miyim" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;vertical-align:-3px;margin-right:6px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp</a>
   </div>
 </header>
 
@@ -950,35 +1173,28 @@
 <!-- SPONSOR BANNER TOP -->
 <div class="sponsor-top">
   <div class="sponsor-top-inner">
-    <div class="sponsor-top-left">
+    <div class="sponsor-top-logo-wrap">
       <img src="yildiz-kurs.png" alt="Yıldız Kurs" class="sponsor-top-logo" />
-      <div class="sponsor-top-text">
-        <h3>Yenimahalle'nin 1 Numarası — Yıldız Kurs</h3>
-        <p>Proje Okullarına Hazırlıkta 15+ Yıllık Tecrübe ve Garantili Başarı</p>
-      </div>
+    </div>
+    <div class="sponsor-top-text">
+      <div class="sponsor-top-badge">Resmi Sponsor</div>
+      <h3>Proje Ortaokullarına Hazırlıkta <em>Yenimahalle'nin 1 Numarası</em></h3>
+      <p>Yıldız Kurs ile uzman kadro, küçük gruplar ve birebir takip. Çocuğunuza hak ettiği geleceği inşa edin.</p>
     </div>
     <div class="sponsor-top-actions">
-      <a href="tel:+903123460633" class="btn-sponsor">📞 Hemen Ara</a>
-      <button class="btn-sponsor white" onclick="openModal()">Randevu Al</button>
+      <a href="tel:+903123460633" class="btn-sponsor">📞 0312 346 06 33</a>
+      <button class="btn-sponsor white" onclick="openModal()">Ücretsiz Randevu Al →</button>
     </div>
   </div>
 </div>
 
 <!-- STATS BAR -->
-<div class="stats-bar">
-  <div class="stats-bar-inner">
-    <div><div class="sbar-num">15+</div><div class="sbar-label">Yıl Deneyim</div></div>
-    <div><div class="sbar-num">%94</div><div class="sbar-label">Yerleşme Oranı</div></div>
-    <div><div class="sbar-num">600+</div><div class="sbar-label">Mezun Öğrenci</div></div>
-    <div><div class="sbar-num">6</div><div class="sbar-label">Proje Okulu Rehberi</div></div>
-  </div>
-</div>
 
 <!-- SCHOOLS SECTION -->
 <section id="okullar">
   <div class="container">
     <div class="section-label">Proje Okulları 2026</div>
-    <h2>Yenimahalle'deki Tüm Proje Okulları</h2>
+    <h2>Yenimahalle'deki Tüm Proje Ortaokulları</h2>
     <p class="section-desc">Güncel sınav tarihleri, kontenjanlar ve başvuru detaylarıyla 6 proje okulu.</p>
 
     <div class="schools-grid">
@@ -1308,30 +1524,59 @@
     <!-- SPONSOR BOTTOM BANNER -->
     <div class="sponsor-bottom reveal">
       <div>
-        <img src="yildiz-kurs.png" alt="Yıldız Kurs" class="sponsor-bottom-logo" />
-        <h3>Proje Okullarına Hazırlıkta<br /><em>Yenimahalle'nin 1 Numarası</em></h3>
-        <p>15 yıllık deneyim, %94 yerleşme oranı ve uzman kadrosuyla çocuğunuzun hayalini gerçeğe dönüştürüyoruz.</p>
+        <div class="sponsor-bottom-logo-wrap">
+          <img src="yildiz-kurs.png" alt="Yıldız Kurs" class="sponsor-bottom-logo" />
+        </div>
+        <div class="sponsor-bottom-tagline">Ankara'nın En Köklü Kursu</div>
+        <h3>Hayalindeki Proje Okulunu <em>Yıldız Kurs ile</em> Kazan</h3>
+        <p>Yenimahalle'nin en deneyimli eğitim kadrosu, sınıf bazlı küçük gruplar, birebir takip ve kişiye özel deneme programlarıyla çocuğunuzun potansiyelini sınava taşıyoruz. Şimdi tanışın, fark yaratın.</p>
         <div class="sponsor-actions">
-          <button class="btn-primary" onclick="openModal()">Randevu Al →</button>
-          <a href="tel:+903123460633" class="btn-secondary" style="color:#fff;border-color:rgba(255,255,255,0.3);">📞 0312 346 06 33</a>
+          <a href="https://wa.me/905324790668?text=Proje%20okullar%C4%B1na%20haz%C4%B1rl%C4%B1k%20hakk%C4%B1nda%20bilgi%20alabilir%20miyim" target="_blank" rel="noopener" class="btn-wa-large">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp'tan Yaz
+          </a>
+          <a href="tel:+903123460633" class="btn-call-outline">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .92h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.9a16 16 0 006.22 6.22l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            0312 346 06 33
+          </a>
         </div>
       </div>
       <div class="sponsor-contact">
         <a href="tel:+903123460633" class="contact-item">
-          <span>0312 346 06 33</span>
-          <span class="icon phone">📞</span>
+          <span class="icon phone">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .92h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.9a16 16 0 006.22 6.22l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          </span>
+          <span>
+            <span class="label-small">Telefon</span>
+            <span class="value">0312 346 06 33</span>
+          </span>
         </a>
-        <a href="https://wa.me/905324790668" target="_blank" rel="noopener" class="contact-item">
-          <span>WhatsApp: 0532 479 06 68</span>
-          <span class="icon wa">💬</span>
+        <a href="https://wa.me/905324790668" target="_blank" rel="noopener" class="contact-item wa-text">
+          <span class="icon wa">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </span>
+          <span>
+            <span class="label-small" style="color:rgba(37,211,102,0.7);">WhatsApp</span>
+            <span class="value">0532 479 06 68</span>
+          </span>
         </a>
         <a href="https://yildizkurs.com.tr" target="_blank" rel="noopener" class="contact-item">
-          <span>yildizkurs.com.tr</span>
-          <span class="icon web">🌐</span>
+          <span class="icon web">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          </span>
+          <span>
+            <span class="label-small">Web</span>
+            <span class="value">yildizkurs.com.tr</span>
+          </span>
         </a>
         <a href="https://www.google.com/maps/place/Y%C4%B1ld%C4%B1z+Kurs/@39.9852817,32.771865,17z" target="_blank" rel="noopener" class="contact-item">
-          <span>Aşağı Yahyalar Mah. 994 Cad. No:6/A<br/>Yenimahalle / Ankara</span>
-          <span class="icon loc">📍</span>
+          <span class="icon loc">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </span>
+          <span>
+            <span class="label-small">Adres</span>
+            <span class="value">Aşağı Yahyalar Mah. 994 Cad. No:6/A</span>
+          </span>
         </a>
       </div>
     </div>
@@ -1348,13 +1593,7 @@
           Yol Tarifi Al
         </a>
       </div>
-      <a href="https://www.google.com/maps/place/Y%C4%B1ld%C4%B1z+Kurs/@39.9852817,32.771865,17z" target="_blank" rel="noopener" class="map-click-wrap">
-        <div class="map-placeholder">
-          <div class="map-pin"></div>
-          <div class="map-label">Yıldız Kurs — Haritada Gör</div>
-          <div class="map-addr">Tıklayarak Google Maps'te açın</div>
-        </div>
-      </a>
+      <iframe src="https://maps.google.com/maps?q=Y%C4%B1ld%C4%B1z+Kurs,+A%C5%9Fa%C4%9F%C4%B1+Yahyalar+Mah.+994+Cad.+No:6%2FA+Yenimahalle%2FAnkara&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="320" style="border:0; display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
 
   </div>
@@ -1382,6 +1621,9 @@
       <a href="https://wa.me/905324790668" class="footer-links" style="color:rgba(255,255,255,0.55);text-decoration:none;display:block;margin-bottom:6px;">💬 0532 479 06 68</a>
       <a href="https://yildizkurs.com.tr" class="footer-links" style="color:rgba(255,255,255,0.55);text-decoration:none;display:block;">🌐 yildizkurs.com.tr</a>
     </div>
+  </div>
+  <div class="footer-disclaimer">
+    Uyarı: Bu sayfadaki bilgiler geçmiş yılların sınavlarına göre öngörü olarak hazırlanmıştır, kesin doğruluk içermez.
   </div>
 </footer>
 
